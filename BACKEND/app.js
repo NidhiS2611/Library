@@ -25,6 +25,9 @@ app.use('/book', bookroutes)
 app.use('/issuedbook', issueBookroutes)
 app.use('/', indexroutes)
 app.use('/library', librarayroutes)
+app.get('/', (req, res) => {
+    res.send('hiii')
+})
 
 app.listen(process.env.PORT || 3000,'0.0.0.0', () => {
     console.log(`server is running on port ${process.env.PORT || 3000}`);
