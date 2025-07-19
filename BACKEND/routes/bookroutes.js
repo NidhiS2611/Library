@@ -3,10 +3,9 @@ const router = express.Router()
 const authmiddle = require('../middleware/authmiddle')
 const{authroll} = require('../middleware/authroll')
 const {createbook,updatebooks,deletebook } = require('../controllers/bookcontroller')
+const upload = require('../utility/multer') // Import multer for file uploads
 
-const multer = require('multer')
-const storage = multer.memoryStorage()
-const upload  = multer({storage:storage})
+
 
 router.post('/addbook',upload.single('image'),authmiddle,authroll('admin'), createbook )
 router.post('/updatebook/:bookid',authmiddle,authroll('admin'),updatebooks)
