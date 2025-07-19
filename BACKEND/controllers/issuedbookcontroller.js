@@ -10,7 +10,7 @@ const issueBook = async (req, res) => {
         const userid = req.user?.id;
 
         if (!userid) {
-            return res.status(401).json({ message: 'Unauthorized' });
+            return res.status(401).json({ message: 'Unauthorized user' });
         }
         const card = await libraraycardmodel.findOne({ user: userid })
         if (!card) {
