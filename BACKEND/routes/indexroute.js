@@ -5,7 +5,7 @@ const{getallbooks} = require('../controllers/bookcontroller')
 const authmiddle = require('../middleware/authmiddle')
 const { authroll } = require('../middleware/authroll')
 
-router.get('/getallbooks', authmiddle,getallbooks)
+router.get('/getallbooks',getallbooks)
 
 router.get('/search', async (req, res) => {
   try {
@@ -17,8 +17,10 @@ router.get('/search', async (req, res) => {
         { category: { $regex: search, $options: 'i' } }
       ]
     });
-
-    // Filter invalid/undefined entries & send full book objects
+      if(!books){
+        return res.status(404).json({message:'no books found'})
+      }
+    
         res.json({ filterbooks: books });
         
         
