@@ -1,41 +1,32 @@
 
 import React from 'react';
+import { FaSearch } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
   return (
-    <section className="bg-gradient-to-br from-blue-50 to-indigo-100 py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        
-        <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-          Welcome to Your <span className="text-blue-600 block">Digital Library</span>
+    <section className="bg-gradient-to-br from-white to-blue-50 dark:from-gray-900 dark:to-gray-800 py-24 transition-colors duration-500">
+      <div className="max-w-6xl mx-auto px-6 text-center">
+
+        {/* Header */}
+        <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 dark:text-white leading-tight mb-4">
+          📚 Welcome to Your <span className="text-blue-600 dark:text-blue-400">Digital Library</span>
         </h1>
 
-    
-        <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-          Discover, learn, and grow with our comprehensive library management system. 
-          Access thousands of books, resources, and digital content from anywhere.
+        {/* Subheading */}
+        <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-10">
+          Manage your books, members, and digital assets in one place. Experience learning without limits.
         </p>
 
-    
-        <div className="max-w-2xl mx-auto mb-8">
-          <div className="relative">
-            <input 
-              type="text"
-              placeholder="Search books, authors, or topics..."
-              className="w-full pl-4 pr-4 py-4 text-black text-lg border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
-            />
-            <button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-              Search
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+          <Link to="/Explore">
+            <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-semibold shadow-md transition-transform hover:scale-105">
+              Explore Catalog →
             </button>
-          </div>
-        </div>
+          </Link>
 
-    
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium">
-            Explore Catalog →
-          </button>
-          <button className="border border-blue-600 text-blue-600 px-8 py-3 rounded-lg hover:bg-blue-50 transition-colors font-medium">
+          <button className="border border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-gray-700 px-8 py-3 rounded-full font-semibold transition-transform hover:scale-105">
             Learn More
           </button>
         </div>
