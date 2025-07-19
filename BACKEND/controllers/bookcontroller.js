@@ -15,7 +15,6 @@ const createbook = async(req,res)=>{
         totalcopies,
         availablecopies,
         image: req.file ? req.file.buffer : null 
-        
        })
        console.log(book);
        res.status(201).json({message:'book created successfully',book})
