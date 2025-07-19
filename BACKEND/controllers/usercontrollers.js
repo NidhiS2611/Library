@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt')
 const {generatetoken } = require('../utility/generatetoken')
 const issuedbookmodel = require('../model/issuedbookmodel')
 const bookmodel = require('../model/bookmodel')
+const librarycardmodel = require('../model/librarycard')
+const { librarycard } = require('./librarycardcontroller')
 
 
 const userschema = z.object({
@@ -193,12 +195,45 @@ catch(err){
         console.error(err);
         res.status(500).json({ message: 'Internal server error' });
     }
- }
+}
 
+ const updateuser = async (req, res) => {
+  const userid = req.user?.id; 
+  const { name, email } = req.body;
 
-const Book = require('../model/bookmodel');
-const IssuedBook = require('../model/issuedbookmodel');
+  try {
+    const updateData = {};
 
+    if (name) updateData.name = name;
+    if (email) updateData.email = email;
+
+    
+    if (req.file) {
+      updateData.profile = req.file ? req.file.buffer : null 
+    }
+
+    const updatedUser = await usermodel.findByIdAndUpdate(
+      userid,
+      updateData,
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+ console.log('User updated successfully:', updatedUser);
+ 
+    res.status(200).json({
+      message: 'User updated successfully',
+      user: updatedUser
+    });
+
+  } catch (error) {
+    console.error('Update Error:', error);
+    res.status(500).json({ message: 'Something went wrong while updating' });
+  }
+};
+ 
 const dashboard = async (req, res) => {
   try {
     const totalBooks = await bookmodel.countDocuments();
@@ -227,9 +262,38 @@ const dashboard = async (req, res) => {
     console.error("Dashboard summary error:", error);
     res.status(500).json({ error: "Failed to fetch dashboard summary" });
   }}
+    
+  const profilesummary = async(req,res)=>{
+    try{
+      const userid = req.user?.id
+      if(!userid){
+        return res.status(401).json({ message: "Unauthorized" });
+      }
+      const user = await usermodel.findById(userid)
+    
+      const issuedbook = await issuedbookmodel.find({user:userid})
 
+      const bookread = issuedbook.filter(book => book.isreturned).length
+      const currentlyReading = issuedbook.filter(book => !book.isreturned).length
+      const card = await librarycardmodel.findOne({user:userid})
+      
+               res.status(200).json({
+      name: user.name,
+      email: user.email,
+      joinedDate: user.createdAt,
+      profile: user.profile,  
+      cardnumber: card?.cardnumber || null,
+      stats: {
+        bookread,
+        currentlyReading,
+       // static for now or calculate later
+      }
+    });
+      
+    } catch(err){
+        console.error("Profile summary error:", err);
+        res.status(500).json({ err: "Failed to fetch profile summary" });
+    }
+  }
 
-module.exports = {register,login, getalluser, deleteuser, returnedbook, issuedbook, logout, dashboard}
-
-
-
+module.exports = {register,login, getalluser, deleteuser, returnedbook, issuedbook, logout, dashboard, updateuser, profilesummary};
