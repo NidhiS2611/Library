@@ -1,3 +1,4 @@
+
 // Librarydashboard.jsx
 import Sidebar from '../component/Sidebar';
 import Header from '../component/Header';
@@ -12,13 +13,13 @@ const Librarydashboard = () => {
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
   useEffect(() => {
-    axios.get("ttps://library-management-dwg7.onrender.com/user/me", { withCredentials: true })
+    axios.get("http://localhost:3000/user/me", { withCredentials: true })
       .then((res) => setUserName(res.data.user.name))
       .catch((err) => console.log("User fetch error:", err));
   }, []);
 
   return (
-    <div className="flex h-screen overflow-hidden bg-white">
+    <div className="flex h-screen  w-full overflow-hidden bg-gray-100 dark:bg-gray-900 text-black dark:text-white">
       <Sidebar active={sidebarOpen} toggleSidebar={toggleSidebar} />
       <div className="flex-1 flex flex-col overflow-y-auto">
         <Header userName={userName} toggleSidebar={toggleSidebar} />

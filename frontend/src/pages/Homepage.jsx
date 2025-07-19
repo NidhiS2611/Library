@@ -4,7 +4,7 @@ import HeroSection from '../component/HeroSection'
 import AboutContact from '../component/AboutContact'
 function Homepage() {
   return (
-    <div>
+    <div >
       <Navbar />
       <HeroSection/>
       <AboutContact/>

@@ -13,7 +13,7 @@ const IssuedBooks = () => {
         withCredentials: true,
       });
 
-      console.log('Fetched books:', res.data);
+
       setBooks(res.data.issuedbook || []);
     } catch (err) {
       console.error('Error fetching issued books:', err);
@@ -24,7 +24,7 @@ const IssuedBooks = () => {
   };
 
   const handleReturn = async (issuedbookid) => {
-    console.log('Returning book with ID:', issuedbookid);
+
     
     try {
      const res=  await axios.put(`http://localhost:3000/issuedbook/returnbook/${issuedbookid}`,
@@ -45,12 +45,12 @@ const IssuedBooks = () => {
   }, []);
 
   return (
-    <div className="p-4 sm:p-6 md:p-8 bg-white min-h-[85vh] w-full rounded-xl shadow-md">
-      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 mb-4 sm:mb-6 text-center sm:text-left">
+    <div className="p-4 sm:p-6 md:p-8 bg-white min-h-[85vh] w-full rounded-xl shadow-md dark:bg-gray-900  dark:text-white">
+      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 mb-4 sm:mb-6 text-center sm:text-left dark:text-white">
         📚 Issued Books
       </h2>
       {message && (
-        <div className="mb-4 bg-green-100 border border-green-300 text-green-800 px-4 py-2 rounded">
+        <div className="mb-4 bg-green-100 border border-green-300 text-green-800 px-4 py-2 rounded dark:bg-gray-800 dark:text-white dark:border-gray-200">
           ✅ {message}
         </div>
       )}
@@ -70,9 +70,9 @@ const IssuedBooks = () => {
       ) : (
         <>
           
-          <div className="hidden sm:block overflow-x-auto text-black">
+          <div className="hidden sm:block overflow-x-auto text-black dark:text-white">
             <table className="w-full text-left border rounded-lg overflow-hidden">
-              <thead className="bg-gray-100 text-gray-700 text-sm sm:text-base">
+              <thead className="bg-gray-100 text-gray-700 text-sm sm:text-base ">
                 <tr>
                   <th className="py-3 px-4">Book</th>
                   <th className="py-3 px-4">Author name</th>
@@ -96,11 +96,11 @@ const IssuedBooks = () => {
                   const isOverdue = new Date() > new Date(book.returnDate);
 
                   return (
-                    <tr key={book._id} className="border-b hover:bg-gray-50 transition">
+                    <tr key={book._id} className="border-b hover:bg-gray-50 transition dark:hover:bg-slate-800">
                       <td className="py-4 px-4">
-                        <div className="font-semibold">{book.book.title}</div></td>
+                        <div className="font-semibold dark:text-white">{book.book.title}</div></td>
                       <td className="py-4 px-4">
-                        <div className="text-sm text-gray-500">{book.book.author}</div></td>
+                        <div className="text-sm text-gray-500 dark:text-white">{book.book.author}</div></td>
                       
                       <td className="py-4 px-4">{issued}</td>
                       <td className="py-4 px-4">{due}</td>
@@ -131,7 +131,7 @@ const IssuedBooks = () => {
           </div>
 
           
-          <div className="sm:hidden space-y-4 text-black">
+          <div className="sm:hidden space-y-4 text-black dark:text-white">
             {books.map((book) => {
               if (!book || !book.book) return null;
 
@@ -149,7 +149,7 @@ const IssuedBooks = () => {
                   className="border border-gray-200 rounded-lg p-4 shadow-sm"
                 >
                   <h3 className="font-bold text-md mb-1"><span className="font-semibold">Book Title:</span>{book.book.title}</h3>
-                  <p className="text-sm text-gray-500 mb-2"> <span className="font-semibold">Author name:</span>{book.book.author}</p>
+                  <p className="text-sm mb-2"> <span className="font-semibold">Author name:</span>{book.book.author}</p>
                   <p className="text-sm mb-1">
                     <span className="font-semibold">Issued:</span> {issued}
                   </p>
