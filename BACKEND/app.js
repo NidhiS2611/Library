@@ -16,6 +16,7 @@ const bookroutes = require('./routes/bookroutes')
 const issueBookroutes = require('./routes/issuedbookroutes')
 const indexroutes = require('./routes/indexroute')
 const librarayroutes = require('./routes/librarayroutes')
+const adminroutes = require('./routes/adminroutes')
 const dotenv = require('dotenv')
 dotenv.config()
 const cookieParser = require('cookie-parser')
@@ -25,6 +26,7 @@ app.use('/book', bookroutes)
 app.use('/issuedbook', issueBookroutes)
 app.use('/', indexroutes)
 app.use('/library', librarayroutes)
+app.use('/admin', adminroutes)
 
 
 app.listen(process.env.PORT || 3000,'0.0.0.0', () => {

@@ -6,6 +6,7 @@ const issuedbookmodel = require('../model/issuedbookmodel')
 const bookmodel = require('../model/bookmodel')
 const librarycardmodel = require('../model/librarycard')
 const { librarycard } = require('./librarycardcontroller')
+const { model } = require('mongoose')
 
 
 const userschema = z.object({
@@ -111,19 +112,60 @@ const login = async(req,res)=>{
     }
 }
 
-const getalluser = async(req,res)=>{
-    try{
-    const users = await usermodel.find()
-    if(!users){
-        return res.status(404).json({error:'no users found'})
-    }
-    res.status(200).json({message:'users fetched successfully',users})
-    }
-    catch(err){
-        console.log(err);
-        return res.status(500).json({error:'internal server error'})
-    }
-}
+const getalluser = async (req, res) => {
+  try {
+    const users = await usermodel.aggregate([
+      {
+        $match: { role: 'user' },
+      },
+      {
+        $lookup: {
+          from: "librarycards",
+          localField: "_id",
+          foreignField: "user",
+          as: "cardInfo"
+        }
+      },
+      {
+        $unwind: {
+          path: "$cardInfo",
+          preserveNullAndEmptyArrays: true
+        }
+      },
+      {
+        $addFields: {
+          status: {
+            $cond: {
+              if: {
+                $and: [
+                  { $ne: ["$cardInfo", null] },
+                  { $eq: ["$cardInfo.isActive", true] }
+                ]
+              },
+              then: "Active",
+              else: "Inactive"
+            }
+          }
+        }
+      },
+      {
+        $project: {
+          name: 1,
+          email: 1,
+          role: 1,
+          "cardInfo.cardnumber": 1,
+          status: 1
+        }
+      }
+    ]);
+
+    res.json(users);
+  } catch (err) {
+    console.error("Error in getalluser:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 
 const deleteuser = async(req,res)=>{
     try{
@@ -296,4 +338,36 @@ const dashboard = async (req, res) => {
     }
   }
 
-module.exports = {register,login, getalluser, deleteuser, returnedbook, issuedbook, logout, dashboard, updateuser, profilesummary};
+  const userdetails = async (req,res)=>{
+    try{
+      const userid = req.params.id
+      if(!userid){
+        
+        
+       return  res.status(401).json({message:"Unauthrised access"})
+      }
+
+      const user = await usermodel.findById(userid).populate({path:'issuedbooks',populate:{path:'book',model:'book'}})
+      console.log(user.issuedbooks)
+
+      const issued = user.issuedbooks.filter(b => !b.isreturned)
+      const returnbook = await issuedbookmodel.find({user:userid,isreturned:true}).populate('book')
+      console.log('returned books', returnbook);
+      
+     
+      
+
+      const card = await librarycardmodel.findOne({user:userid})
+
+      res.json({user,card,issuedbooks:issued,returnedbooks:returnbook})
+
+    }
+ catch(err){
+  console.log('error', err)
+  res.status(400).json({error:"internal error"})
+ }
+}
+
+
+
+module.exports = {register,login, getalluser, deleteuser, returnedbook, issuedbook, logout, dashboard, updateuser, profilesummary,userdetails}

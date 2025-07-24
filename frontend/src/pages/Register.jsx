@@ -1,7 +1,8 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,NavLink } from 'react-router-dom';
+
 
 const Register = () => {
   const navigate = useNavigate();
@@ -121,6 +122,7 @@ const Register = () => {
               Login
             </a>
           </p>
+          <p  className='text-center font-semibold text-blue-700'>   <NavLink to = '/' className='mb-6' >Back To Home</NavLink></p>
         </form>
       </div>
     </div>

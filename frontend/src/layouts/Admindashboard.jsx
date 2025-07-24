@@ -1,29 +1,39 @@
-import React from 'react'
-import axios from 'axios';
+
+// AdminDashboard.jsx
+import AdminSidebar from '../component/AdminSidebar';
+import AdminHeader from '../component/AdminHeader';
+import { Outlet } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import Header from '../component/Header';
+import axios from 'axios';
 
 
-const Admindashboard = () => {
-    
-      
-      const [userName, setUserName] = useState('');
-    
-    
-    
-      useEffect(() => {
-        axios.get("http://localhost:3000/user/me", { withCredentials: true })
-          .then((res) => setUserName(res.data.user.name))
-          .catch((err) => console.log("User fetch error:", err));
-      }, []);
+const AdminDashboard = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [adminName, setAdminName] = useState('');
+
+  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+
+  useEffect(() => {
+    axios.get("http://localhost:3000/user/me", { withCredentials: true })
+      .then((res) => setAdminName(res.data.user.name))
+      .catch((err) => console.log("Admin fetch error:", err));
+  }, []);
+
   return (
-    <div>
-      <h3></h3>
+    <div className="flex h-screen w-full overflow-hidden bg-gray-100 dark:bg-gray-900 text-black dark:text-white">
+      <AdminSidebar active={sidebarOpen} toggleSidebar={toggleSidebar} />
+      <div className="flex-1 flex flex-col overflow-y-auto">
+        <AdminHeader userName={adminName} toggleSidebar={toggleSidebar} />
+        <main className="p-4">
+          
+          <Outlet />
+        </main>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Admindashboard
+export default AdminDashboard;
 
 
 

@@ -2,16 +2,17 @@ const bookmodel = require('../model/bookmodel')
 
 const createbook = async(req,res)=>{
     try{
-      const{title,author,category,isbn,totalcopies,availablecopies}  = req.body
-       if(!title||!author || !category || !isbn || !totalcopies || !availablecopies){
-        return res.status(400).json({error:'all fields are required'})
+      const{title,author,category,totalcopies,availablecopies}  = req.body
+       if(!title||!author || !category  || !totalcopies || !availablecopies){
+        return res.status(400).json({message:'all fields are required'})
        }
+const uniqueid = Math.floor(100000 + Math.random() *90000 )
        const book = await bookmodel.create({
 
         title,
         author,
         category,
-        isbn,
+        isbn: `ISBN-${uniqueid}`,
         totalcopies,
         availablecopies,
         image: req.file ? req.file.buffer : null 
@@ -23,7 +24,7 @@ const createbook = async(req,res)=>{
     }
     catch(err){
         console.log(err);
-        return res.status(500).json({error:'internal server error'})
+        return res.status(500).json({message:'internal server error'})
         
     }
 }
@@ -32,7 +33,7 @@ const createbook = async(req,res)=>{
 const getallbooks = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;         // Page number from query
-    const limit = parseInt(req.query.limit) || 8;       // Books per page
+    const limit = parseInt(req.query.limit) || 12;       // Books per page
     const skip = (page - 1) * limit;
 
     const books = await bookmodel.find().skip(skip).limit(limit);

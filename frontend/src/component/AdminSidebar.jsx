@@ -1,16 +1,15 @@
-
-// Sidebar.jsx
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { BookOpen, BookCheck, BookX, User, Home, X ,HomeIcon} from 'lucide-react';
+import { BookOpen, Users, Settings, Home, X, BookCheck,HomeIcon } from 'lucide-react';
 
-const Sidebar = ({ active, toggleSidebar }) => {
+
+const AdminSidebar = ({ active, toggleSidebar }) => {
   const menuItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: Home, path: '/user/dashboard' },
-    { id: 'books', label: 'All Books', icon: BookOpen, path: '/user/Books' },
-    { id: 'issued', label: 'Issued Books', icon: BookCheck, path: '/user/IssuedBooks' },
-    { id: 'returned', label: 'Returned Books', icon: BookX, path: '/user/Returnedbooks' },
-    { id: 'profile', label: 'Profile', icon: User, path: '/user/Profile' }
+    { id: 'dashboard', label: 'Home', icon: Home, path: '/admin/home' },
+    { id: 'users', label: 'Manage Users', icon: Users, path: '/admin/manageuser' },
+    { id: 'books', label: 'Manage Books', icon: BookCheck, path: '/admin/managebooks' },
+    { id: 'settings', label: 'Settings', icon: Settings, path: '/admin/settings' },
+    { id: 'addbooks', label: 'Add Book', icon: Settings, path: '/admin/addbooks' },
   ];
 
   return (
@@ -27,19 +26,20 @@ const Sidebar = ({ active, toggleSidebar }) => {
         {/* Top Section */}
         <div className="p-6 border-b dark:border-gray-800 flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+            <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-pink-500 rounded-lg flex items-center justify-center">
               <BookOpen className="w-6 h-6 text-white" />
             </div>
-            <div>
-              <h1 className="text-xl font-bold text-gray-800 dark:text-white">LibraryNS</h1>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Digital Library</p>
-            </div>
+            <div >
+              <h1 className="text-xl font-bold text-gray-800 dark:text-white">AdminNS</h1>
+              <p className="text-sm text-gray-600 dark:text-gray-400 ">Admin Panel</p>
+              </div>
           </div>
-          {/* Close Button on Mobile */}
           <button className="md:hidden" onClick={toggleSidebar}>
             <X className="w-6 h-6 text-gray-600 dark:text-gray-400" />
           </button>
+          
         </div>
+        
 
         {/* Menu */}
         <nav className="p-4">
@@ -64,13 +64,15 @@ const Sidebar = ({ active, toggleSidebar }) => {
             ))}
           </ul>
         </nav>
-         <div className='flex gap-4 ml-7 dark:text-gray-100 text-blue-900'>
-                  <HomeIcon/>
-                       <NavLink to = "/" className="font-bold ">Back to Home</NavLink>
-                </div>
+        <div className='flex gap-4 ml-7 dark:text-gray-100 text-blue-900'>
+          <HomeIcon/>
+               <NavLink to = "/" className="font-bold ">Back to Home</NavLink>
+        </div>
+      
+
       </div>
     </>
   );
 };
 
-export default Sidebar;
+export default AdminSidebar;

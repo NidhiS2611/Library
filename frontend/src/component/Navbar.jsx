@@ -20,7 +20,8 @@ const Navbar = () => {
           <div className="text-2xl font-bold tracking-wide text-blue-500 dark:text-blue-400">
             📚 LibraryNS
           </div>
-
+           
+         
           {/* Desktop Links */}
           <div className="hidden md:flex items-center space-x-4">
             <Link
@@ -39,11 +40,19 @@ const Navbar = () => {
             {/* Theme Toggle */}
             <button
               onClick={Toggletheme}
-              className="ml-4 px-2 py-1 border rounded text-sm transition-all hover:bg-blue-100 dark:hover:bg-gray-800"
+              className="block w-full text-sm border mt-2 py-1 px-2 rounded hover:bg-blue-100 dark:hover:bg-gray-800"
             >
-              {darkMode ? '🌙 Dark' : '☀️ Light'}
+              {darkMode ? '🌙 Dark ' : ' ☀️ Light '}
             </button>
+              
           </div>
+
+
+
+
+
+
+
 
           {/* Hamburger */}
           <div className="md:hidden">
@@ -75,7 +84,7 @@ const Navbar = () => {
               onClick={Toggletheme}
               className="block w-full text-sm border mt-2 py-1 rounded hover:bg-blue-100 dark:hover:bg-gray-800"
             >
-              {darkMode ? '🌙 Dark Mode' : '☀️ Light Mode'}
+              {darkMode ? '🌙 Dark' : '☀️ Light'}
             </button>
           </div>
         )}

@@ -8,7 +8,7 @@ const upload = require('../utility/multer') // Import multer for file uploads
 
 
 router.post('/addbook',upload.single('image'),authmiddle,authroll('admin'), createbook )
-router.post('/updatebook/:bookid',authmiddle,authroll('admin'),updatebooks)
+router.put('/updatebook/:bookid',authmiddle,authroll('admin'),updatebooks)
 router.delete('/deletebook/:bookid',authmiddle,authroll('admin'),deletebook)
 
 module.exports = router

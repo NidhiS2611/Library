@@ -146,8 +146,23 @@ Library Admin
     return res.status(500).json({ message: 'Internal server error' });
   }
 };
+const deletereturedbook = async (req,res) =>{
+  try{
+    const issuedbookid = req.params.id
+  const issuedbook = await issuedbookmodel.findByIdAndDelete({ _id: issuedbookid, isreturned: true });
+console.log(issuedbook);
 
+    if(!issuedbook){
+      return res.status(404).json({message: 'Issued book not found or not returned'})
+    }
+    return res.status(200).json({message: 'Issued book deleted successfully'})
+  }
+  catch(err){
+    console.error(err);
+    return res.status(500).json({message: 'Internal server error'})
+  }
+}
 
-module.exports = { issueBook, returnbook };
+module.exports = { issueBook, returnbook, deletereturedbook };
 
 

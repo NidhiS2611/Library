@@ -15,7 +15,15 @@ import Books from './pages/Books.jsx'
 import Profile from './pages/Profile.jsx';
 import Admindashboard from './layouts/Admindashboard.jsx';
 import Explore from './pages/Explore.jsx';
+import Adminhome from './pages/Adminhome.jsx';
+import Manageuser from './pages/Manageuser.jsx';
+import Userdetails from './pages/Userdetails.jsx';
+import Managebooks from './pages/Managebooks.jsx';
+import Addbooks from './pages/Addbooks.jsx';
 function App() {
+
+
+
 
 
 
@@ -29,18 +37,26 @@ function App() {
 
           <Route path="/user" element={<Protected><Librarydashboard /></Protected>}>
             <Route index element={<Navigate to="dashboard" />} />
-              
+
             <Route path="dashboard" element={<Userdashboard />} />
             <Route path="Books" element={<Books />} />
             <Route path="IssuedBooks" element={<IssuedBooks />} />
             <Route path="Returnedbooks" element={<ReturnedBooks />} />
             <Route path="Profile" element={<Profile />} />
-            
+
           </Route>
-          <Route path = '/admin' element = { <Admindashboard/>}/>
+
           <Route path="/Explore" element={<Explore />} />
 
-          
+          <Route path="/admin" element={<Protected><Admindashboard /></Protected>} >
+            <Route index element={<Navigate to="home" />} />
+            <Route path="home" element={<Adminhome />} />
+            <Route path="manageuser" element={<Manageuser />} />
+            <Route path="manageuser/:userid" element={<Userdetails />} />
+            <Route path="managebooks" element={<Managebooks />} />
+            <Route path="addbooks" element={<Addbooks />} />
+
+          </Route>
 
         </Routes>
 
@@ -53,4 +69,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

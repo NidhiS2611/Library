@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,NavLink } from 'react-router-dom';
 import axios from 'axios';
 
 const Login = () => {
@@ -38,7 +38,9 @@ const Login = () => {
   };
 
   return (
+    
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 px-4">
+      
       <div className="w-full max-w-md bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8 dark:shadow-gray-800">
         <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-6">
           Welcome Back!
@@ -88,6 +90,8 @@ const Login = () => {
               Register
             </a>
           </p>
+          <p  className='text-center font-semibold text-blue-700'>   <NavLink to = '/' className='mb-6' >Back To Home</NavLink></p>
+    
         </form>
       </div>
     </div>

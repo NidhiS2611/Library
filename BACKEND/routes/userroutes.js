@@ -8,7 +8,7 @@ const upload = require('../utility/multer');
 
 router.post('/register', register);
 router.post('/login', login);
-router.get('/getallusers', authmiddle, authroll('admin'), getalluser);
+
 router.delete('/deleteuser/:id', authmiddle, deleteuser);
 router.get('/returnedbooks', authmiddle, returnedbook);
 router.get('/issuedbooks', authmiddle, issuedbook);

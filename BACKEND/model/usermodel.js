@@ -20,7 +20,7 @@ const userschema = new mongoose.Schema({
    },
    issuedbooks: [{
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'issuedbooks'
+      ref: 'issuedbook'
    }],
   profile:Buffer,
 
