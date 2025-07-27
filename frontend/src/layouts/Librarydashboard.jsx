@@ -23,7 +23,7 @@ const Librarydashboard = () => {
       <Sidebar active={sidebarOpen} toggleSidebar={toggleSidebar} />
       <div className="flex-1 flex flex-col overflow-y-auto">
         <Header userName={userName} toggleSidebar={toggleSidebar} />
-        <main className="p-4">
+        <main className="p-4 ">
           <Outlet />
         </main>
       </div>
