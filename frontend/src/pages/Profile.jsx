@@ -13,7 +13,7 @@ const Profile = () => {
 
   const fetchProfile = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/user/profilesummary", {
+      const res = await axios.get("https://library-management-dwg7.onrender.com/user/profilesummary", {
         withCredentials: true
       });
       setProfile(res.data);
@@ -60,7 +60,7 @@ const Profile = () => {
     }
 
     try {
-      await axios.patch("http://localhost:3000/user/updateuser", formData, {
+      await axios.patch("https://library-management-dwg7.onrender.com/user/updateuser", formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
         withCredentials: true
       });

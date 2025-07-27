@@ -9,7 +9,7 @@ const IssuedBooks = () => {
 
   const fetchIssuedBooks = async () => {
     try {
-      const res = await axios.get('http://localhost:3000/user/issuedbooks', {
+      const res = await axios.get('https://library-management-dwg7.onrender.com/user/issuedbooks', {
         withCredentials: true,
       });
 
@@ -27,7 +27,7 @@ const IssuedBooks = () => {
 
     
     try {
-     const res=  await axios.put(`http://localhost:3000/issuedbook/returnbook/${issuedbookid}`,
+     const res=  await axios.put(`https://library-management-dwg7.onrender.com/issuedbook/returnbook/${issuedbookid}`,
         {},
         { withCredentials: true }
       );
