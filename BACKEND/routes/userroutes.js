@@ -14,7 +14,7 @@ router.get('/returnedbooks', authmiddle, returnedbook);
 router.get('/issuedbooks', authmiddle, issuedbook);
 router.get('/me', authmiddle, async (req, res) => {
   try {
-    const user = await usermodel.findById(req.user.id).select('-password');
+    const user = await usermodel.findById(req.user.id)
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
