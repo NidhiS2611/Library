@@ -9,6 +9,8 @@ mongoose.connect(mongouri)
 .then(()=>{
    
     dbgr('MongoDB connected')
+    console.log('connected ');
+    
     
 }).catch((err)=>{
    
