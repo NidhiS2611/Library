@@ -17,6 +17,7 @@ mongoose.connect(mongouri,{
 }).catch((err)=>{
    
     dbgr('MongoDB connection error:', err)
+    console.error('MongoDB connection error:', err)
 })
 
 module.exports = mongoose
