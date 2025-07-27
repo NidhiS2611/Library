@@ -9,7 +9,7 @@ const Manageuser = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/admin/getallusers',{ withCredentials: true });
+      const response = await axios.get('https://library-management-dwg7.onrender.com/admin/getallusers',{ withCredentials: true });
       setUsers(response.data);
       console.log('Fetched users:', response.data);
       
@@ -22,7 +22,7 @@ const Manageuser = () => {
 
   const deleteuser = async(id)=>{
     try{
-         await axios.delete(`http://localhost:3000/admin/deleteuser/${id}`, {
+         await axios.delete(`https://library-management-dwg7.onrender.com/admin/deleteuser/${id}`, {
           withCredentials:true
         })
         setUsers((prev)=> prev.filter((b)=>b._id!== id))
