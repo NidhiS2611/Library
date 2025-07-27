@@ -240,7 +240,12 @@ const issuedbook = async (req, res) => {
 }
 const logout = async (req, res) => {
   try {
-    res.clearCookie('token');
+    res.clearCookie('token',{
+       httpOnly: true,
+      secure: true,         // ✅ required for HTTPS (Render)
+      sameSite: 'None'
+
+    });
     res.status(200).json({ message: 'Logged out successfully' });
   } catch (err) {
     console.error(err);
