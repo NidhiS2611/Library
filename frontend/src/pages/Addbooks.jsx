@@ -71,6 +71,13 @@ const Addbooks = () => {
       });
 
       setMessage(res.data.message);
+          setFormData({
+      title: "",
+      author: "",
+      availablecopies: "",
+      totalcopies: "",
+      category: "",
+    });
   setTimeout(() => {
     setMessage("")
     setError('')
