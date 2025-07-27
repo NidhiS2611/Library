@@ -7,7 +7,9 @@ dotenv.config()
 const mongouri = process.env.MONGODB_URI
 console.log(mongouri);
 
-mongoose.connect(mongouri)
+mongoose.connect(mongouri,{
+      serverSelectionTimeoutMS: 10000
+})
 .then(()=>{
    
     dbgr('MongoDB connected')
