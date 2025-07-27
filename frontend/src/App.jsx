@@ -11,7 +11,7 @@ import Librarydashboard from './layouts/Librarydashboard.jsx';
 import IssuedBooks from './pages/IssuedBooks.jsx';
 import ReturnedBooks from './pages/Returnedbooks.jsx';
 import Userdashboard from './pages/Userdashboard.jsx';
-import Books from './pages/books.jsx';
+import Books from './pages/Books.jsx';
 import Profile from './pages/Profile.jsx';
 import Admindashboard from './layouts/Admindashboard.jsx';
 import Explore from './pages/Explore.jsx';
