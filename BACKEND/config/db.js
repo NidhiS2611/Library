@@ -4,8 +4,8 @@ const dotenv =require('dotenv')
 const dbgr = require('debug')('app:db')
 dotenv.config()
 
-const mongouri = process.env.MONGODB_URI
-console.log(mongouri);
+const mongouri = process.env.MONGODB_URI?.trim()
+console.log(mongouri,'mongouri');
 
 mongoose.connect(mongouri,{
       serverSelectionTimeoutMS: 10000
