@@ -5,6 +5,8 @@ const dbgr = require('debug')('app:db')
 dotenv.config()
 
 const mongouri = process.env.MONGODB_URI
+console.log(mongouri);
+
 mongoose.connect(mongouri)
 .then(()=>{
    
