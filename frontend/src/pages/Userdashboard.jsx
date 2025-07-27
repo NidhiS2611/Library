@@ -18,7 +18,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/user/dashboard", {
+        const res = await axios.get("https://library-management-dwg7.onrender.com/user/dashboard", {
           withCredentials: true,
         });
         setStats(res.data);
