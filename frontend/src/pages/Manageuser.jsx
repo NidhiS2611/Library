@@ -20,6 +20,21 @@ const Manageuser = () => {
     }
   };
 
+  const deleteuser = async(id)=>{
+    try{
+         await axios.delete(`http://localhost:3000/admin/deleteuser/${id}`, {
+          withCredentials:true
+        })
+        setUsers((prev)=> prev.filter((b)=>b._id!== id))
+
+    }
+    catch(err){
+      console.log('error in deletion',err);
+      
+    }
+  }
+  
+
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -65,6 +80,7 @@ const Manageuser = () => {
                   <th className="py-3 px-4">Card No</th>
                   <th className="py-3 px-4">Status</th>
                   <th className="py-3 px-4">View</th>
+                  <th className='py-3 px-4'>Delete User</th>
                 </tr>
               </thead>
               <tbody>
@@ -93,6 +109,9 @@ const Manageuser = () => {
                         View
                       </Link>
                     </td>
+                    <td className="py-4 px-4">
+                      <button className='bg-green-700 py-2 px-2 rounded-full text-sm font-medium' onClick={()=>deleteuser(user._id)}>Delete User</button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -119,6 +138,7 @@ const Manageuser = () => {
                 >
                   View
                 </Link>
+              
               </div>
             ))}
           </div>

@@ -9,7 +9,7 @@ const upload = require('../utility/multer');
 router.post('/register', register);
 router.post('/login', login);
 
-router.delete('/deleteuser/:id', authmiddle, deleteuser);
+
 router.get('/returnedbooks', authmiddle, returnedbook);
 router.get('/issuedbooks', authmiddle, issuedbook);
 router.get('/me', authmiddle, async (req, res) => {
@@ -27,4 +27,5 @@ router.get('/logout', authmiddle, logout);
 router.patch('/updateuser', authmiddle, upload.single('profile'), updateuser);
 router.get('/dashboard', authmiddle, dashboard);
 router.get('/profilesummary', authmiddle, profilesummary);
+
 module.exports = router;

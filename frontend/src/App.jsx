@@ -11,7 +11,7 @@ import Librarydashboard from './layouts/Librarydashboard.jsx';
 import IssuedBooks from './pages/IssuedBooks.jsx';
 import ReturnedBooks from './pages/Returnedbooks.jsx';
 import Userdashboard from './pages/Userdashboard.jsx';
-import Books from './pages/Books.jsx'
+import Books from './pages/books.jsx';
 import Profile from './pages/Profile.jsx';
 import Admindashboard from './layouts/Admindashboard.jsx';
 import Explore from './pages/Explore.jsx';
@@ -20,6 +20,7 @@ import Manageuser from './pages/Manageuser.jsx';
 import Userdetails from './pages/Userdetails.jsx';
 import Managebooks from './pages/Managebooks.jsx';
 import Addbooks from './pages/Addbooks.jsx';
+import Adminprofile from './pages/Adminprofile.jsx';
 function App() {
 
 
@@ -55,6 +56,7 @@ function App() {
             <Route path="manageuser/:userid" element={<Userdetails />} />
             <Route path="managebooks" element={<Managebooks />} />
             <Route path="addbooks" element={<Addbooks />} />
+            <Route path="profile" element={<Adminprofile />} />
 
           </Route>
 

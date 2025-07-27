@@ -7,7 +7,7 @@ import axios from 'axios';
 const Books = () => {
   const [books, setBooks] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const booksPerPage = 12;
+  const booksPerPage = 8;
   const [totalBooks, setTotalBooks] = useState(0);
   const [issuingBookId, setIssuingBookId] = useState(null);
   const [error, setError] = useState('');

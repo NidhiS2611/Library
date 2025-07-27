@@ -33,19 +33,27 @@ router.get('/search', async (req, res) => {
   }
 
 })
-router.get('/admindashboard', async (req,res)=> {
+router.get('/admindashboard', authmiddle,authroll('admin'), async (req,res)=> {
 try{
-  const books = await bookmodel.find()
-  if(!books){
-    return res.status(404).json({message:'no books found'})
-  }
-  const users = await usermodel.find()
-  const issuedbook = await issuedbookmodel.find({isreturned:false})
-  const returnbook = await issuedbookmodel.find({isreturned:true})
-   res.status(200).json({users,books,issuedbook,returnbook})
- 
-}
+const totalbooks = await bookmodel.countDocuments();
+const totalusers = await usermodel.countDocuments(); 
+const totalissuedbooks = await issuedbookmodel.countDocuments({isreturned:false})
+const totalreturnedbooks = await issuedbookmodel.countDocuments({isreturned:true})
+const totalfineaggregate = await issuedbookmodel.aggregate([
+  { $match: { isreturned: true } },
+  { $group: { _id: null, total: { $sum: "$fine" } } }
+])
+const totalfine = totalfineaggregate[0]?.total || 0;
 
+
+res.status(200).json({
+  totalbooks,
+  totalusers,
+  totalissuedbooks,
+  totalreturnedbooks,
+  totalfine
+});
+}
 catch(err){
   console.log('error in fetching', err);
   res.status(401).json({message: 'internal err'})

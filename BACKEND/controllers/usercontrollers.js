@@ -76,15 +76,22 @@ const login = async(req,res)=>{
     try{
  
         const{email,password} = req.body
+       
+        
+        
         if(!email || !password){
             return res.status(400).json({message:'all fields are required'})
         }
 
         const user = await usermodel.findOne({email})
+        
+        
         if(!user){
-            return res.status(400).json({message:'invalid credentials'})
+            return res.status(400).json({message:'User not find'})
         }
         const match = await bcrypt.compare(password,user.password)
+        console.log(user.password);
+        
         if(!match){
             return res.status(400).json({message:'invalid credentials'})
         }
@@ -171,7 +178,7 @@ const deleteuser = async(req,res)=>{
     try{
         const userid =req.params.id
             if(!userid){
-                return res.status(400).json({error:'userid is required'})
+                return res.status(400).json({message:'userid is required'})
 
             }
             const user = await usermodel.findByIdAndDelete(userid)
@@ -179,7 +186,7 @@ const deleteuser = async(req,res)=>{
                 return res.status(200).json({message:'user deleted successfully'})
             }
             else{
-                return res.status(404).json({error:'user not found'})
+                return res.status(404).json({message:'user not found'})
 
         }
     }
@@ -359,7 +366,8 @@ const dashboard = async (req, res) => {
 
       const card = await librarycardmodel.findOne({user:userid})
 
-      res.json({user,card,issuedbooks:issued,returnedbooks:returnbook})
+   const totalfine = returnbook.reduce((acc,cur) => acc+ (cur.fine||0),0)
+      res.json({user,card,issuedbooks:issued,returnedbooks:returnbook, totalfine});
 
     }
  catch(err){
@@ -367,7 +375,38 @@ const dashboard = async (req, res) => {
   res.status(400).json({error:"internal error"})
  }
 }
+const changepaassword = async(req,res)=>{
+  try{
+    const userid = req.user?.id
+    const {oldPassword,newPassword} = req.body
+    console.log(oldPassword);
+    
+    if(!userid || !oldPassword || !newPassword){
+      return res.status(400).json({message:"All fields are required"})
+    }
+
+    const user = await usermodel.findById(userid)
+    if(!user){
+      return res.status(404).json({message:"User not found"})
+    }
+    ismatch = await bcrypt.compare(oldPassword , user.password)
+    if(!ismatch){
+      return res.status(400).json({message:"Old password is incorrect"})
+    }
+
+    const hashnewpassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashnewpassword
+    await user.save();
+    res.status(200).json({message:"Password changed successfully"})
+    
+    
+    
+  } catch(err){
+    console.log('error in changing password', err);
+    res.status(500).json({message:'internal server error'})
+  }
+}
 
 
 
-module.exports = {register,login, getalluser, deleteuser, returnedbook, issuedbook, logout, dashboard, updateuser, profilesummary,userdetails}
+module.exports = {register,login, getalluser, deleteuser, returnedbook, issuedbook, logout, dashboard, updateuser, profilesummary,userdetails, changepaassword}

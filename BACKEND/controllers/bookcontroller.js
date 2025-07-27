@@ -3,6 +3,12 @@ const bookmodel = require('../model/bookmodel')
 const createbook = async(req,res)=>{
     try{
       const{title,author,category,totalcopies,availablecopies}  = req.body
+      const userid = req.user?.id
+      
+      
+      
+    
+      
        if(!title||!author || !category  || !totalcopies || !availablecopies){
         return res.status(400).json({message:'all fields are required'})
        }
@@ -15,9 +21,11 @@ const uniqueid = Math.floor(100000 + Math.random() *90000 )
         isbn: `ISBN-${uniqueid}`,
         totalcopies,
         availablecopies,
-        image: req.file ? req.file.buffer : null 
+        image: req.file ? req.file.buffer : null ,
+        createdby:userid
+
        })
-       console.log(book);
+       
        res.status(201).json({message:'book created successfully',book})
        
 

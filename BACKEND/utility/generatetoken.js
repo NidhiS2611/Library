@@ -8,7 +8,7 @@ if (!process.env.JWT_SECRET) {
 const generatetoken = async(newuser)=>{
    
     try{
-        console.log("USER WHILE GENERATING TOKEN:", newuser);
+        
         const token =  await jwt.sign({id:newuser._id, role:newuser.role}, process.env.JWT_SECRET, {expiresIn: '30m'})
           return token
     }

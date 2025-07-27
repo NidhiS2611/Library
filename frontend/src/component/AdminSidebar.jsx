@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { BookOpen, Users, Settings, Home, X, BookCheck,HomeIcon } from 'lucide-react';
+import { BookOpen, Users, Settings, Home, X, BookCheck,HomeIcon ,User,Book} from 'lucide-react';
 
 
 const AdminSidebar = ({ active, toggleSidebar }) => {
@@ -8,8 +8,8 @@ const AdminSidebar = ({ active, toggleSidebar }) => {
     { id: 'dashboard', label: 'Home', icon: Home, path: '/admin/home' },
     { id: 'users', label: 'Manage Users', icon: Users, path: '/admin/manageuser' },
     { id: 'books', label: 'Manage Books', icon: BookCheck, path: '/admin/managebooks' },
-    { id: 'settings', label: 'Settings', icon: Settings, path: '/admin/settings' },
-    { id: 'addbooks', label: 'Add Book', icon: Settings, path: '/admin/addbooks' },
+    { id: 'settings', label: 'Profile', icon:  User, path: '/admin/Profile' },
+    { id: 'addbooks', label: 'Add Book', icon:Book , path: '/admin/addbooks' },
   ];
 
   return (
