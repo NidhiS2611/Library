@@ -16,7 +16,7 @@ const Header = ({ userName, toggleSidebar }) => {
 
   const createcard = async () => {
     try {
-      const res = await axios.post('http://localhost:3000/library/createcard', {}, {
+      const res = await axios.post('https://library-management-dwg7.onrender.com/library/createcard', {}, {
         withCredentials: true
       });
       setMessage(res.data.message || 'Library card created successfully');
@@ -28,7 +28,7 @@ const Header = ({ userName, toggleSidebar }) => {
 
   const logouthandler = async () => {
     try {
-      await axios.get('http://localhost:3000/user/logout', {
+      await axios.get('https://library-management-dwg7.onrender.com/user/logout', {
         withCredentials: true
       });
       navigate('/login');
