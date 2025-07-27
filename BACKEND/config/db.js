@@ -4,14 +4,12 @@ const dotenv =require('dotenv')
 const dbgr = require('debug')('app:db')
 dotenv.config()
 
-mongouri = process.env.MONGODB_URI
+const mongouri = process.env.MONGODB_URI
 mongoose.connect(mongouri)
 .then(()=>{
    
     dbgr('MongoDB connected')
-    console.log('connected ');
-    
-    
+    console.log('connected  successfully');
 }).catch((err)=>{
    
     dbgr('MongoDB connection error:', err)
