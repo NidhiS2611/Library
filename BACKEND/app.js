@@ -3,7 +3,7 @@ const db = require('./config/db')
 const app = express()
 const cors = require('cors')
 app.use(cors({
-  origin: 'https://library-management-z39u.vercel.app', // Allow frontend origin
+  origin: 'http://localhost:5173', // Allow frontend origin
   credentials: true               // Allow cookies / credentials
 }));
 app.use(express.json())
