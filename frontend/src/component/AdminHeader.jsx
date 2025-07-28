@@ -16,7 +16,7 @@ const AdminHeader = ({ userName, toggleSidebar }) => {
 
   const logouthandler = async () => {
     try {
-      await axios.get('http://localhost:3000/user/logout', {
+      await axios.get('https://library-management-dwg7.onrender.com/user/logout', {
         withCredentials: true
       });
       navigate('/login');
