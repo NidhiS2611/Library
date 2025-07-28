@@ -291,21 +291,25 @@ const updateuser = async (req, res) => {
 };
 
 const dashboard = async (req, res) => {
+  const userid= req.user?.id
   try {
     const totalBooks = await bookmodel.countDocuments();
 
     const issuedBooks = await issuedbookmodel.countDocuments({
       isreturned: false,
+      user:userid
     });
 
     const returnedBooks = await issuedbookmodel.countDocuments({
       isreturned: true,
+      user:userid
     });
 
     const today = new Date();
     const overdueBooks = await issuedbookmodel.countDocuments({
       dueDate: { $lt: today },
       isreturned: false,
+    user:userid
     });
 
     res.json({
