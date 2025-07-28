@@ -36,7 +36,7 @@ router.get('/search', async (req, res) => {
 router.get('/admindashboard', authmiddle,authroll('admin'), async (req,res)=> {
 try{
 const totalbooks = await bookmodel.countDocuments();
-const totalusers = await usermodel.countDocuments(); 
+const totalusers = await usermodel.countDocuments({role: 'user'}); 
 const totalissuedbooks = await issuedbookmodel.countDocuments({isreturned:false})
 const totalreturnedbooks = await issuedbookmodel.countDocuments({isreturned:true})
 const totalfineaggregate = await issuedbookmodel.aggregate([
