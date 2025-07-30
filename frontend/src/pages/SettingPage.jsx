@@ -29,7 +29,7 @@ const SettingsPage = () => {
         </Link>
         <Link
           to="/helpsettings"
-          className="block px-6 py-4  dark:bg-gray-800 rounded-lg shadow hover:bg-blue-50 dark:hover:bg-gray-700 transition text-gray-900 dark:text-gray-100w-full"
+          className="block px-6 py-4  dark:bg-gray-800 rounded-lg shadow hover:bg-blue-50 dark:hover:bg-gray-700 transition text-gray-900 dark:text-gray-100 w-full"
         >
           Help
         </Link>
