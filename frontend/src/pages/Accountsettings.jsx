@@ -1,0 +1,111 @@
+import React, { useState } from "react";
+import axios from "axios";
+
+const Accountsettings = () => {
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  // API: Deactivate Account
+  const handleDeactivate = async () => {
+    try {
+      setLoading(true);
+      setMessage("");
+      setError("");
+
+      const res = await axios.patch(
+        "https://your-api-url.com/user/deactivate",
+        {},
+        { withCredentials: true }
+      );
+
+      setMessage(res.data.message || "Account deactivated successfully.");
+    } catch (err) {
+      setError(
+        err.response?.data?.message || "Something went wrong while deactivating."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // API: Delete Account
+  const handleDelete = async () => {
+    try {
+      setLoading(true);
+      setMessage("");
+      setError("");
+
+      const res = await axios.delete(
+        "https://your-api-url.com/user/delete",
+        { withCredentials: true }
+      );
+
+      setMessage(res.data.message || "Account deleted permanently.");
+    } catch (err) {
+      setError(
+        err.response?.data?.message || "Something went wrong while deleting."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-900 text-white py-10 px-4 sm:px-8 md:px-16">
+      <div className="max-w-3xl mx-auto bg-gray-800 rounded-lg shadow-lg p-6 sm:p-10">
+        <h2 className="text-3xl font-bold mb-6 border-b border-gray-700 pb-2">
+          Account Settings
+        </h2>
+
+        {/* Show Message */}
+        {message && (
+          <p className="text-green-400 mb-4 bg-green-900 px-4 py-2 rounded">
+            {message}
+          </p>
+        )}
+
+        {/* Show Error */}
+        {error && (
+          <p className="text-red-400 mb-4 bg-red-900 px-4 py-2 rounded">
+            {error}
+          </p>
+        )}
+
+        <div className="space-y-8">
+          {/* Deactivate */}
+          <div className="bg-gray-700 p-5 rounded-lg">
+            <h3 className="text-xl font-semibold mb-2">Temporarily Deactivate</h3>
+            <p className="text-gray-300 mb-4 text-sm">
+              You can deactivate your account temporarily. You can reactivate it later by logging in again.
+            </p>
+            <button
+              className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-6 py-2 rounded transition w-full sm:w-auto"
+              onClick={handleDeactivate}
+              disabled={loading}
+            >
+              {loading ? "Processing..." : "Deactivate Account"}
+            </button>
+          </div>
+
+          {/* Delete */}
+          <div className="bg-gray-700 p-5 rounded-lg">
+            <h3 className="text-xl font-semibold mb-2">Delete Account Permanently</h3>
+            <p className="text-gray-300 mb-4 text-sm">
+              This will permanently delete your account and all data. Action cannot be undone.
+            </p>
+            <button
+              className="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-2 rounded transition w-full sm:w-auto"
+              onClick={handleDelete}
+              disabled={loading}
+            >
+              {loading ? "Deleting..." : "Delete Permanently"}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Accountsettings;
