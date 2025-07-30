@@ -2,7 +2,7 @@
 // Sidebar.jsx
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { BookOpen, BookCheck, BookX, User, Home, X ,HomeIcon} from 'lucide-react';
+import { BookOpen, BookCheck, BookX, User, Home, X ,HomeIcon,Settings} from 'lucide-react';
 
 const Sidebar = ({ active, toggleSidebar }) => {
   const menuItems = [
@@ -10,7 +10,9 @@ const Sidebar = ({ active, toggleSidebar }) => {
     { id: 'books', label: 'All Books', icon: BookOpen, path: '/user/Books' },
     { id: 'issued', label: 'Issued Books', icon: BookCheck, path: '/user/IssuedBooks' },
     { id: 'returned', label: 'Returned Books', icon: BookX, path: '/user/Returnedbooks' },
-    { id: 'profile', label: 'Profile', icon: User, path: '/user/Profile' }
+    { id: 'profile', label: 'Profile', icon: User, path: '/user/Profile' },
+    { id: 'settings', label: 'Settings', icon: Settings, path: '/user/settings' }
+
   ];
 
   return (

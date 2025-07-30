@@ -45,6 +45,12 @@ function App() {
             <Route path="IssuedBooks" element={<IssuedBooks />} />
             <Route path="Returnedbooks" element={<ReturnedBooks />} />
             <Route path="Profile" element={<Profile />} />
+            <Route path="/settings" element={<SettingsPage />} />
+            <Route path="/settings/accountsettings" element={<AccountSettings />} />
+            <Route path="/settings/notificationsettings" element={<Notificationsettings />} />
+            <Route path="/settings/securitysettings" element={<SecuritySettings />} />
+            <Route path="/settings/helpsettings" element={<HelpSettings />} />
+            <Route path="/settings/aisettings" element={<AISettings />} />
 
           </Route>
 
@@ -58,9 +64,10 @@ function App() {
             <Route path="managebooks" element={<Managebooks />} />
             <Route path="addbooks" element={<Addbooks />} />
             <Route path="profile" element={<Adminprofile />} />
+        
 
           </Route>
-            <Route path="/notificationsettings" element={<Notificationsettings />} />
+
 
         </Routes>
 
