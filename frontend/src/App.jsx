@@ -22,7 +22,7 @@ import Managebooks from './pages/Managebooks.jsx';
 import Addbooks from './pages/Addbooks.jsx';
 import Adminprofile from './pages/Adminprofile.jsx';
 import Notificationsettings from './pages/Notificationsttings.jsx';
-import
+import SettingsPage from './pages/SettingPage.jsx';
 function App() {
 
 
