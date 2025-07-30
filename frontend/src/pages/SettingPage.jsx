@@ -3,43 +3,39 @@ import { Link } from 'react-router-dom';
 
 const SettingsPage = () => {
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 px-4 py-8">
-      <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-8">
+    <div className="min-h-screen w-full bg-gray-100 dark:bg-gray-900 px-4 py-10 flex flex-col items-center">
+      <h2 className="text-3xl font-semibold text-center mb-10 dark:text-white">
         Settings
       </h2>
 
-      <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div className="w-full max-w-md flex flex-col space-y-5">
         <Link
           to="/accountsettings"
-          className="p-5 bg-white dark:bg-gray-800 rounded-lg shadow hover:bg-gray-200 dark:hover:bg-gray-700 text-center font-medium text-gray-800 dark:text-gray-200 transition"
+          className="block px-6 py-4 bg-white dark:bg-gray-800 rounded-lg shadow hover:bg-blue-50 dark:hover:bg-gray-700 transition text-gray-900 dark:text-gray-100"
         >
-          Account
+          Account Settings
         </Link>
-
         <Link
           to="/notificationsettings"
-          className="p-5 bg-white dark:bg-gray-800 rounded-lg shadow hover:bg-gray-200 dark:hover:bg-gray-700 text-center font-medium text-gray-800 dark:text-gray-200 transition"
+          className="block px-6 py-4 bg-white dark:bg-gray-800 rounded-lg shadow hover:bg-blue-50 dark:hover:bg-gray-700 transition text-gray-900 dark:text-gray-100"
         >
-          Notifications
+          Notification Settings
         </Link>
-
         <Link
           to="/securitysettings"
-          className="p-5 bg-white dark:bg-gray-800 rounded-lg shadow hover:bg-gray-200 dark:hover:bg-gray-700 text-center font-medium text-gray-800 dark:text-gray-200 transition"
+          className="block px-6 py-4 bg-white dark:bg-gray-800 rounded-lg shadow hover:bg-blue-50 dark:hover:bg-gray-700 transition text-gray-900 dark:text-gray-100"
         >
-          Security
+          Security Settings
         </Link>
-
         <Link
           to="/helpsettings"
-          className="p-5 bg-white dark:bg-gray-800 rounded-lg shadow hover:bg-gray-200 dark:hover:bg-gray-700 text-center font-medium text-gray-800 dark:text-gray-200 transition"
+          className="block px-6 py-4 bg-white dark:bg-gray-800 rounded-lg shadow hover:bg-blue-50 dark:hover:bg-gray-700 transition text-gray-900 dark:text-gray-100"
         >
           Help
         </Link>
-
         <Link
           to="/aisettings"
-          className="p-5 bg-white dark:bg-gray-800 rounded-lg shadow hover:bg-gray-200 dark:hover:bg-gray-700 text-center font-medium text-gray-800 dark:text-gray-200 transition"
+          className="block px-6 py-4 bg-white dark:bg-gray-800 rounded-lg shadow hover:bg-blue-50 dark:hover:bg-gray-700 transition text-gray-900 dark:text-gray-100"
         >
           AI Settings
         </Link>
@@ -49,4 +45,5 @@ const SettingsPage = () => {
 };
 
 export default SettingsPage;
+
 
