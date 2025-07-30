@@ -22,6 +22,7 @@ import Managebooks from './pages/Managebooks.jsx';
 import Addbooks from './pages/Addbooks.jsx';
 import Adminprofile from './pages/Adminprofile.jsx';
 import Notificationsettings from './pages/Notificationsttings.jsx';
+import
 function App() {
 
 
@@ -46,11 +47,7 @@ function App() {
             <Route path="Returnedbooks" element={<ReturnedBooks />} />
             <Route path="Profile" element={<Profile />} />
             <Route path="/settings" element={<SettingsPage />} />
-            <Route path="/settings/accountsettings" element={<AccountSettings />} />
-            <Route path="/settings/notificationsettings" element={<Notificationsettings />} />
-            <Route path="/settings/securitysettings" element={<SecuritySettings />} />
-            <Route path="/settings/helpsettings" element={<HelpSettings />} />
-            <Route path="/settings/aisettings" element={<AISettings />} />
+           
 
           </Route>
 
