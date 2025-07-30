@@ -3,44 +3,50 @@ import { Link } from 'react-router-dom';
 
 const SettingsPage = () => {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
-      <div className="w-full max-w-sm p-6 bg-white rounded-lg shadow-lg dark:bg-gray-800">
-        <h2 className="text-2xl font-semibold text-center mb-6 dark:text-white">Settings</h2>
-        <div className="flex flex-col space-y-4">
-          <Link
-            to="/accountsettings"
-            className="text-gray-800 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 transition"
-          >
-            Account
-          </Link>
-          <Link
-            to="/notificationsettings"
-            className="text-gray-800 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 transition"
-          >
-            Notifications
-          </Link>
-          <Link
-            to="/securitysettings"
-            className="text-gray-800 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 transition"
-          >
-            Security
-          </Link>
-          <Link
-            to="/helpsettings"
-            className="text-gray-800 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 transition"
-          >
-            Help
-          </Link>
-          <Link
-            to="/aisettings"
-            className="text-gray-800 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 transition"
-          >
-            AI Settings
-          </Link>
-        </div>
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 px-4 py-8">
+      <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-8">
+        Settings
+      </h2>
+
+      <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <Link
+          to="/accountsettings"
+          className="p-5 bg-white dark:bg-gray-800 rounded-lg shadow hover:bg-gray-200 dark:hover:bg-gray-700 text-center font-medium text-gray-800 dark:text-gray-200 transition"
+        >
+          Account
+        </Link>
+
+        <Link
+          to="/notificationsettings"
+          className="p-5 bg-white dark:bg-gray-800 rounded-lg shadow hover:bg-gray-200 dark:hover:bg-gray-700 text-center font-medium text-gray-800 dark:text-gray-200 transition"
+        >
+          Notifications
+        </Link>
+
+        <Link
+          to="/securitysettings"
+          className="p-5 bg-white dark:bg-gray-800 rounded-lg shadow hover:bg-gray-200 dark:hover:bg-gray-700 text-center font-medium text-gray-800 dark:text-gray-200 transition"
+        >
+          Security
+        </Link>
+
+        <Link
+          to="/helpsettings"
+          className="p-5 bg-white dark:bg-gray-800 rounded-lg shadow hover:bg-gray-200 dark:hover:bg-gray-700 text-center font-medium text-gray-800 dark:text-gray-200 transition"
+        >
+          Help
+        </Link>
+
+        <Link
+          to="/aisettings"
+          className="p-5 bg-white dark:bg-gray-800 rounded-lg shadow hover:bg-gray-200 dark:hover:bg-gray-700 text-center font-medium text-gray-800 dark:text-gray-200 transition"
+        >
+          AI Settings
+        </Link>
       </div>
     </div>
   );
 };
 
 export default SettingsPage;
+
