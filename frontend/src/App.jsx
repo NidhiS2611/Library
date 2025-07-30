@@ -60,11 +60,11 @@ function App() {
             <Route path="profile" element={<Adminprofile />} />
 
           </Route>
+            <Route path="/notificationsettings" element={<Notificationsettings />} />
 
         </Routes>
 
 
-       <Route path="/notificationsettings" element={<Notificationsettings />} />
 
       </Router>
 
