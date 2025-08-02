@@ -1,25 +1,35 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
+
 import axios from "axios";
 
 const Accountsettings = () => {
+  const navigate = useNavigate();
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   // API: Deactivate Account
   const handleDeactivate = async () => {
+    
     try {
       setLoading(true);
       setMessage("");
       setError("");
 
-      const res = await axios.patch(
-        "https://your-api-url.com/user/deactivate",
+      const res = await axios.put(
+        `http://localhost:3000/user/deactivate`,
         {},
         { withCredentials: true }
       );
 
       setMessage(res.data.message || "Account deactivated successfully.");
+
+
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
+
     } catch (err) {
       setError(
         err.response?.data?.message || "Something went wrong while deactivating."
@@ -52,9 +62,9 @@ const Accountsettings = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white py-10 px-4 sm:px-8 md:px-16">
-      <div className="max-w-3xl mx-auto bg-gray-800 rounded-lg shadow-lg p-6 sm:p-10">
-        <h2 className="text-3xl font-bold mb-6 border-b border-gray-700 pb-2">
+    <div className="min-h-screen bg-gray-50 text-white py-10 px-4 sm:px-8 md:px-16 dark:bg-gray-900 dark:text-white">
+      <div className=" mx-auto bg-white rounded-lg shadow-lg p-6 sm:p-10 dark:bg-gray-900 dark:text-white w-full ">
+        <h2 className="text-3xl font-bold mb-6 border-b border-gray-700 pb-2 text-black dark:text-white">
           Account Settings
         </h2>
 
@@ -74,9 +84,9 @@ const Accountsettings = () => {
 
         <div className="space-y-8">
           {/* Deactivate */}
-          <div className="bg-gray-700 p-5 rounded-lg">
+          <div className="bg-gray-50 p-5 rounded-lg dark:bg-gray-900 ">
             <h3 className="text-xl font-semibold mb-2">Temporarily Deactivate</h3>
-            <p className="text-gray-300 mb-4 text-sm">
+            <p className="text-black mb-4 text-sm dark:text-white">
               You can deactivate your account temporarily. You can reactivate it later by logging in again.
             </p>
             <button
@@ -87,11 +97,12 @@ const Accountsettings = () => {
               {loading ? "Processing..." : "Deactivate Account"}
             </button>
           </div>
+        
 
           {/* Delete */}
-          <div className="bg-gray-700 p-5 rounded-lg">
+          <div className="bg-gray-50 p-5 rounded-lg dark:bg-gray-900  ">
             <h3 className="text-xl font-semibold mb-2">Delete Account Permanently</h3>
-            <p className="text-gray-300 mb-4 text-sm">
+            <p className="text-black mb-4 text-sm dark:text-white">
               This will permanently delete your account and all data. Action cannot be undone.
             </p>
             <button

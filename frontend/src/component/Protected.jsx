@@ -10,7 +10,7 @@ const Protected = ({ children }) => {
     const [status, setStatus] = useState('loading')
 
     useEffect(() => {
-        axios.get('https://library-management-dwg7.onrender.com/user/me', {
+        axios.get('http://localhost:3000/user/me', {
             withCredentials: true
         })
             .then((res) => {

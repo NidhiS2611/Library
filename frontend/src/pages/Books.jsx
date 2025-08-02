@@ -16,7 +16,7 @@ const Books = () => {
 
   const fetchBooks = async (page) => {
     try {
-      const res = await axios.get(`https://library-management-dwg7.onrender.com/getallbooks?page=${page}&limit=${booksPerPage}`, {
+      const res = await axios.get(`http://localhost:3000/getallbooks?page=${page}&limit=${booksPerPage}`, {
         withCredentials: true,
       });
       setBooks(res.data.books);
@@ -109,7 +109,7 @@ const Books = () => {
             className="bg-white  rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition p-2 flex flex-col dark:bg-gray-900 dark:text-white"
           >
             <img
-            const name
+          
               src={
       book.image?.data
         ? `data:image/jpeg;base64,${btoa(

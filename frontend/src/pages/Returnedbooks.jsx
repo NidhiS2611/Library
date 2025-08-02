@@ -22,7 +22,7 @@ const Returnedbooks = () => {
   useEffect(() => {
     const fetchReturnedBooks = async () => {
       try {
-        const res = await axios.get("https://library-management-dwg7.onrender.com/user/returnedbooks", {
+        const res = await axios.get("http://localhost:3000/user/returnedbooks", {
           withCredentials: true,
         });
         setReturnedBooks(res.data.returndbook);
@@ -36,7 +36,7 @@ const Returnedbooks = () => {
 
   const handleDelete = async (issuedbookid) => {
     try {
-      await axios.delete(`https://library-management-dwg7.onrender.com/issuedbook/deletereturnedbooks/${issuedbookid}`, {
+      await axios.delete(`http://localhost:3000/issuedbook/deletereturnedbooks/${issuedbookid}`, {
         withCredentials: true,
       });
 

@@ -86,8 +86,11 @@ const login = async (req, res) => {
     const user = await usermodel.findOne({ email })
 
 
-    if (!user) {
+    if (!user ) {
       return res.status(400).json({ message: 'User not find' })
+    }
+    if (!user.isActive) {
+      return res.status(403).json({ message: 'Account is deactivated. Please contact support.', deactivated: true });
     }
     const match = await bcrypt.compare(password, user.password)
    
@@ -420,6 +423,119 @@ const changepaassword = async (req, res) => {
   }
 }
 
+const deactivateaccount = async(req,res)=>{
+  try{
+    const userid = req.user?.id 
+    if(!userid){
+      return res.status(400).json({ message: 'User ID is required' });
+
+  }
+
+  const user = await usermodel.findByIdAndUpdate(userid,{isActive:false} , {new:true})
+  if (!user) {
+    return res.status(404).json({ message: 'User not found' });
+  }
+  res.status(200).json({ message: 'Account deactivated successfully', user });
+  console.log('Account deactivated successfully:', user);
+}
+  catch(err){
+    console.log('error in deactivating account', err);
+    res.status(500).json({ message: 'internal server error' })
+  } 
+}
 
 
-module.exports = { register, login, getalluser, deleteuser, returnedbook, issuedbook, logout, dashboard, updateuser, profilesummary, userdetails, changepaassword }
+const reactivateaccount = async(req,res)=>{
+  try{
+    const {email} = req.body
+    
+    
+    console.log('Email provided:', email);
+    
+    
+    
+    const user = await usermodel.findOneAndUpdate({email:email},{isActive:true} , {new:true})
+    console.log('User found:', user);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.status(200).json({ message: 'Account reactivated successfully', user });
+    console.log('Account reactivated successfully:', user);
+  }
+  catch(err){
+    console.log('error in reactivating account', err);
+    res.status(500).json({ message: 'internal server error' })
+  }
+}
+
+const updatenotification = async(req,res)=>{
+  const userid = req.user?.id;
+  
+  
+  const {method, triggers} = req.body;
+  
+  
+  try{
+    const user = await usermodel.findByIdAndUpdate(userid, {
+      notificationPreferences: {
+        method,
+        triggers
+      }
+    }, { new: true });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+  
+    res.status(200).json({ message: 'Notification settings updated successfully', notificationPreferences: user.notificationPreferences });
+  }
+  catch(err){
+    console.log('error in updating notification settings', err);
+    res.status(500).json({ message: 'internal server error' })
+  }
+}
+
+const getnotificationsetting = async(req,res)=>{
+  const userid = req.user?.id
+  
+  
+  try{
+    const user= await usermodel.findById(userid).select('notificationPreferences');
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    
+
+    res.status(200).json({ message: 'Notification settings retrieved successfully', notificationPreferences: user.notificationPreferences });
+  }
+  catch(err){
+    console.log('error in getting notification settings', err);
+    res.status(500).json({ message: 'internal server error' })
+  }
+}
+
+const savetoken = async (req,res)=>{
+  try{
+ const {token }= req.body
+ const userid = req.user?.id
+ if (!userid || !token) {
+   return res.status(400).json({ message: 'User ID and token are required' });
+ }
+ const user = await usermodel.findByIdAndUpdate(userid,{fcmToken: token}, {new:true})
+  if (!user) {    
+    return res.status(404).json({ message: 'User not found' });
+  }
+  res.status(200).json({ message: 'Token saved successfully', user });
+  console.log('FCM Token saved:', user.fcmToken);
+
+  }
+  catch(err){
+    console.log('error in saving token', err);
+    res.status(500).json({ message: 'internal server error' })
+    
+
+  }
+}
+
+module.exports = { register, login, getalluser, deleteuser, returnedbook, issuedbook, logout, dashboard, updateuser, profilesummary, userdetails, changepaassword, deactivateaccount ,reactivateaccount ,updatenotification, getnotificationsetting ,savetoken}

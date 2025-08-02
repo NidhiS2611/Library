@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './component/Navbar.jsx'
 import Homepage from './pages/Homepage.jsx';
@@ -23,9 +23,25 @@ import Addbooks from './pages/Addbooks.jsx';
 import Adminprofile from './pages/Adminprofile.jsx';
 
 import SettingsPage from './pages/SettingPage.jsx';
+import Accountsettings from './pages/Accountsettings.jsx';
+import Reactivate from './pages/Reactivate.jsx';
+import Notificationsttings from './pages/Notificationsttings.jsx';
+import NotificationListener from './component/NotificationListener.jsx';
 function App() {
 
 
+  useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('/firebase-messaging-sw.js')
+        .then((registration) => {
+          console.log('✅ Service Worker Registered:', registration);
+        })
+        .catch((err) => {
+          console.error('❌ SW registration failed:', err);
+        });
+    }
+  }, []);
 
 
 
@@ -33,10 +49,13 @@ function App() {
   return (
     <>
       <Router>
+        <NotificationListener />
         <Routes>
+          
           <Route path="/" element={<Homepage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/reactivateaccount" element={<Reactivate />} />
 
           <Route path="/user" element={<Protected><Librarydashboard /></Protected>}>
             <Route index element={<Navigate to="dashboard" />} />
@@ -47,7 +66,8 @@ function App() {
             <Route path="Returnedbooks" element={<ReturnedBooks />} />
             <Route path="Profile" element={<Profile />} />
             <Route path="settings" element={<SettingsPage />} />
-           
+            <Route path="settings/accountsettings" element={<Accountsettings />} />
+            <Route path="settings/notificationsettings" element={<Notificationsttings />} />
 
           </Route>
 

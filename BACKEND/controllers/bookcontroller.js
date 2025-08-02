@@ -1,4 +1,6 @@
 const bookmodel = require('../model/bookmodel')
+const  notifyUsersAboutNewBook  = require('../utility/notifyNewBook');
+
 
 const createbook = async(req,res)=>{
     try{
@@ -25,16 +27,17 @@ const uniqueid = Math.floor(100000 + Math.random() *90000 )
         createdby:userid
 
        })
-       
-       res.status(201).json({message:'book created successfully',book})
-       
 
-    }
-    catch(err){
-        console.log(err);
-        return res.status(500).json({message:'internal server error'})
-        
-    }
+     
+ await notifyUsersAboutNewBook(title, author);
+
+    res.status(201).json({message:'book created successfully',book})
+
+  }
+  catch(err){
+    console.log(err);
+    return res.status(500).json({message:'internal server error'})
+  }
 }
 
 

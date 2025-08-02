@@ -2,7 +2,8 @@
 import React, { useState } from 'react';
 import { useNavigate,NavLink } from 'react-router-dom';
 import axios from 'axios';
-
+import { requestPermissionAndGetToken } from '../firebase/requestPermission'; // Import the function
+// Import the function
 const Login = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -21,26 +22,44 @@ const Login = () => {
     setError('');
 
     try {
-      const response = await axios.post('https://library-management-dwg7.onrender.com/user/login', formData, {
+      const response = await axios.post('http://localhost:3000/user/login', formData, {
         withCredentials: true
       });
 
       const role = response.data.role;
+      const isActive = response.data.isActive;
+
+     
+
+
+    
       if (role === 'admin') {
+         await requestPermissionAndGetToken();
         navigate('/admin');
       } else {
+         await requestPermissionAndGetToken();
         navigate('/user');
       }
     } catch (err) {
       console.log('Login Error:', err);
-      setError(err.response?.data?.message || 'Something went wrong');
+        console.log('Error Response:', err.response?.data); 
+        if (err.response?.data?.deactivated) {
+          setError('Your account is deactivated. Please contact support.');
+          setTimeout(()=>{
+            navigate('/reactivateaccount');
+          },3000)
+
+
+
+
+  } else {
+    setError(err.response?.data?.message || 'Something went wrong');
+  }
     }
   };
 
   return (
-    
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 px-4">
-      
       <div className="w-full max-w-md bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8 dark:shadow-gray-800">
         <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-6">
           Welcome Back!

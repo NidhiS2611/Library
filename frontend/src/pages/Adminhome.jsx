@@ -15,7 +15,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchDashboardStats = async () => {
       try {
-        const res = await axios.get("https://library-management-dwg7.onrender.com/admindashboard", {
+        const res = await axios.get("http://localhost:3000/admindashboard", {
           withCredentials: true,});
         setStats(res.data);
         console.log("Dashboard stats:", res.data);

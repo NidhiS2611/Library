@@ -28,7 +28,27 @@ const userschema = new mongoose.Schema({
    createdAt: {
       type: Date,
       default: Date.now
-   }
+   },
+
+   isActive: {
+      type: Boolean,
+      default: true
+   },
+     notificationPreferences: {
+    method: {
+      email: { type: Boolean, default: false },
+      push: { type: Boolean, default: false }
+    },
+    triggers: {
+      newBook: { type: Boolean, default: false },
+      overdue: { type: Boolean, default: false }
+    }
+  },
+  fcmToken: {
+  type: String,
+  default: "",
+},
+
 
 
 

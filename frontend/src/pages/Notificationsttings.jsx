@@ -1,96 +1,144 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const Notificationsettings = () => {
-  const [preferences, setPreferences] = useState({
-    push: false,
-    email: false,
-    notifyOnDue: false,
-    notifyOnIssue: false,
+
+const NotificationSettings = () => {
+  const [settings, setSettings] = useState({
+    method: {
+      email: false,
+      push: false,
+    },
+    triggers: {
+      newBook: false,
+      overdue: false,
+    },
   });
+  const[error, setError] = useState('');
+  const[message, setMessage] = useState('');
 
-  useEffect(() => {
-    const fetchSettings = async () => {
-      try {
-        const res = await axios.get('https://your-backend-url/user/notification-settings', {
-          withCredentials: true,
-        });
-        setPreferences(res.data);
-      } catch (err) {
-        console.error("Error fetching settings", err);
-      }
-    };
-    fetchSettings();
-  }, []);
-
-  const handleChange = (e) => {
-    const { name, checked } = e.target;
-    setPreferences((prev) => ({ ...prev, [name]: checked }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // 🔁 Reusable fetch function
+  const fetchNotificationSettings = async () => {
     try {
-      await axios.put('https://your-backend-url/user/notification-settings', preferences, {
-        withCredentials: true,
-      });
-      alert("Settings saved!");
+      const res = await axios.get('http://localhost:3000/user/getnotificationsetting',{withCredentials:true});
+      setSettings(res.data.notificationPreferences); // make sure backend is returning only preferences
     } catch (err) {
-      console.error("Error saving settings:", err);
+      console.error('Error fetching settings:', err);
     }
   };
 
+  useEffect(() => {
+    fetchNotificationSettings();
+  }, []);
+
+  const handleChange = (section, field) => (e) => {
+    const { checked } = e.target;
+    setSettings((prev) => ({
+      ...prev,
+      [section]: {
+        ...prev[section],
+        [field]: checked,
+      },
+    }));
+  };
+
+  const handleSave = async () => {
+    try {
+      const res = await axios.put('http://localhost:3000/user/updatenotification', settings, { withCredentials: true });
+      setSettings(settings); // update state with new settings
+      setMessage(res.data.message);
+
+
+      fetchNotificationSettings(); // 👈 refresh after save
+    } catch (err) {
+      setError(err.response?.data?.message || 'Failed to save settings');
+
+
+      console.log('Error:', err);
+    }
+  };
+  setTimeout(()=>{
+    setMessage('');
+    setError('');
+  }, 2000);
+
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-4 py-8">
-      <div className="max-w-2xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-        <h2 className="text-2xl font-bold mb-6 text-blue-600 dark:text-blue-400 text-center">Notification Settings</h2>
+    <div className="p-6 sm:p-10 lg:p-14 text-white bg-[#0f172a] min-h-screen">
+   
+      <div className="max-w-4xl mx-auto bg-[#1e293b] p-8 rounded-xl shadow-lg">
+        <h2 className="text-3xl font-bold mb-10 text-white">Notification Settings</h2>
+         {message && (
+        <div className="mb-4 bg-green-100 border border-green-300 text-green-800 px-4 py-2 rounded dark:bg-gray-800 dark:text-white dark:border-gray-200">
+          ✅ {message}
+        </div>
+      )}
+      {error && (
+        <div className="mb-4 bg-red-100 border border-red-300 text-red-800 px-4 py-2 rounded">
+          ❌ {error}
+        </div>
+      )}
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Notification Method */}
-          <div>
-            <label className="block font-semibold mb-2">Notification Method</label>
-            <div className="space-y-2">
-              <label className="flex items-center">
-                <input type="checkbox" name="push" checked={preferences.push} onChange={handleChange}
-                  className="mr-2" />
-                Push
-              </label>
-              <label className="flex items-center">
-                <input type="checkbox" name="email" checked={preferences.email} onChange={handleChange}
-                  className="mr-2" />
-                Email
-              </label>
-            </div>
+        {/* Notification Method */}
+        <div className="mb-10 border-b border-gray-700 pb-8">
+          <h3 className="text-xl font-semibold mb-4">🔔 Notification Method</h3>
+          <div className="flex flex-col gap-5">
+            <label className="flex items-center gap-4">
+              <input
+                type="checkbox"
+                checked={settings.method.email}
+                onChange={handleChange('method', 'email')}
+                className="form-checkbox h-5 w-5 text-blue-500 rounded-full transition-all duration-200"
+              />
+              <span className="text-base">Email Notifications</span>
+            </label>
+            <label className="flex items-center gap-4">
+              <input
+                type="checkbox"
+                checked={settings.method.push}
+                onChange={handleChange('method', 'push')}
+                className="form-checkbox h-5 w-5 text-blue-500 rounded-full transition-all duration-200"
+              />
+              <span className="text-base">Push Notifications</span>
+            </label>
           </div>
+        </div>
 
-          {/* Notify Triggers */}
-          <div>
-            <label className="block font-semibold mb-2">Notify me for:</label>
-            <div className="space-y-2">
-              <label className="flex items-center">
-                <input type="checkbox" name="notifyOnDue" checked={preferences.notifyOnDue} onChange={handleChange}
-                  className="mr-2" />
-                Overdue Books
-              </label>
-              <label className="flex items-center">
-                <input type="checkbox" name="notifyOnIssue" checked={preferences.notifyOnIssue} onChange={handleChange}
-                  className="mr-2" />
-                Book Issued
-              </label>
-            </div>
+        {/* Notification Triggers */}
+        <div className="mb-10">
+          <h3 className="text-xl font-semibold mb-4">📚 Notify Me For</h3>
+          <div className="flex flex-col gap-5">
+            <label className="flex items-center gap-4">
+              <input
+                type="checkbox"
+                checked={settings.triggers.newBook}
+                onChange={handleChange('triggers', 'newBook')}
+                className="form-checkbox h-5 w-5 text-green-500 rounded-full transition-all duration-200"
+              />
+              <span className="text-base">New Book Added</span>
+            </label>
+            <label className="flex items-center gap-4">
+              <input
+                type="checkbox"
+                checked={settings.triggers.overdue}
+                onChange={handleChange('triggers', 'overdue')}
+                className="form-checkbox h-5 w-5 text-red-500 rounded-full transition-all duration-200"
+              />
+              <span className="text-base">Overdue Alerts</span>
+            </label>
           </div>
+        </div>
 
-          {/* Submit Button */}
-          <div className="text-center">
-            <button type="submit"
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded transition duration-200">
-              Save Settings
-            </button>
-          </div>
-        </form>
+        <button
+          onClick={handleSave}
+          className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-md text-white font-medium transition-all duration-200"
+        >
+          Save Settings
+        </button>
       </div>
     </div>
   );
 };
 
-export default Notificationsettings;
+export default NotificationSettings;
+
+
+
