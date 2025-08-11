@@ -21,10 +21,13 @@ const notificationSchema = new mongoose.Schema(
     },
     type: {
       type: String,
-      enum: ['book', 'system', 'reminder'], // tu aur types add kar sakta hai
+      enum: ['book', 'overdue', 'helpResolved'], // tu aur types add kar sakta hai
       default: 'book'
-    }
+    },
+    isPushEligible: { type: Boolean, default: false }
   },
+
+
   {
     timestamps: true // ✅ adds createdAt and updatedAt automatically
   }

@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from '../component/Navbar'
-import Books from '../pages/Books'
+import Books from '../pages/user/Books'
 
 const Explore = () => {
   return (

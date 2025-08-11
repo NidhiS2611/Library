@@ -19,7 +19,7 @@ const NotificationSettings = () => {
   // 🔁 Reusable fetch function
   const fetchNotificationSettings = async () => {
     try {
-      const res = await axios.get('http://localhost:3000/user/getnotificationsetting',{withCredentials:true});
+      const res = await axios.get('https://library-management-dwg7.onrender.com/user/getnotificationsetting',{withCredentials:true});
       setSettings(res.data.notificationPreferences); // make sure backend is returning only preferences
     } catch (err) {
       console.error('Error fetching settings:', err);
@@ -43,7 +43,7 @@ const NotificationSettings = () => {
 
   const handleSave = async () => {
     try {
-      const res = await axios.put('http://localhost:3000/user/updatenotification', settings, { withCredentials: true });
+      const res = await axios.put('https://library-management-dwg7.onrender.com/user/updatenotification', settings, { withCredentials: true });
       setSettings(settings); // update state with new settings
       setMessage(res.data.message);
 
@@ -62,10 +62,10 @@ const NotificationSettings = () => {
   }, 2000);
 
   return (
-    <div className="p-6 sm:p-10 lg:p-14 text-white bg-[#0f172a] min-h-screen">
-   
-      <div className="max-w-4xl mx-auto bg-[#1e293b] p-8 rounded-xl shadow-lg">
-        <h2 className="text-3xl font-bold mb-10 text-white">Notification Settings</h2>
+    <div className="p-6 sm:p-10 lg:p-14  bg-gray-100 text-black dark:bg-gray-900 dark:text-white min-h-screen">
+
+      <div className="max-w-4xl mx-auto bg-gray-100 dark:bg-gray-800 p-8 rounded-xl shadow-lg">
+        <h2 className="text-3xl font-bold mb-10 text-black dark:text-white">Notification Settings</h2>
          {message && (
         <div className="mb-4 bg-green-100 border border-green-300 text-green-800 px-4 py-2 rounded dark:bg-gray-800 dark:text-white dark:border-gray-200">
           ✅ {message}

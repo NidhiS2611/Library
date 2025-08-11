@@ -16,7 +16,7 @@ const Books = () => {
 
   const fetchBooks = async (page) => {
     try {
-      const res = await axios.get(`http://localhost:3000/getallbooks?page=${page}&limit=${booksPerPage}`, {
+      const res = await axios.get(`https://library-management-dwg7.onrender.com/getallbooks?page=${page}&limit=${booksPerPage}`, {
         withCredentials: true,
       });
       setBooks(res.data.books);

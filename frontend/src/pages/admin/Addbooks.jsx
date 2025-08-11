@@ -63,7 +63,7 @@ const Addbooks = () => {
       
       form.append("image", image);
 
-      const res = await axios.post("http://localhost:3000/book/addbook", form, {
+      const res = await axios.post("https://library-management-dwg7.onrender.com/book/addbook", form, {
         withCredentials: true,
         headers: {
           "Content-Type": "multipart/form-data",
@@ -97,7 +97,7 @@ const Addbooks = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 px-4 py-10">
       <div className="w-full max-w-3xl bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-10">
-        <h2 className="text-3xl font-bold mb-8 text-center text-gray-800 dark:text-white">
+        <h2 className="text-xl sm:text-3xl font-bold mb-8 text-center text-gray-800 dark:text-white">
           ➕ Add New Book
         </h2>
            {message && (

@@ -1,6 +1,6 @@
 
 import axios from 'axios';
-import { Menu } from 'lucide-react';
+import { Menu, Bell } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,6 +8,7 @@ const Header = ({ userName, toggleSidebar }) => {
   const navigate = useNavigate();
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
+  const [hasUnread, setHasUnread] = useState(false);
 
   const getTitle = () => {
     const path = window.location.pathname.split("/")[2];
@@ -48,6 +49,23 @@ const Header = ({ userName, toggleSidebar }) => {
     }
   }, [message, error]);
 
+  // 🛎️ Fetch unread notification status
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        const res = await axios.get('https://library-management-dwg7.onrender.com/notifications/getnotifications', {
+          withCredentials: true,
+        });
+        const unread = res.data.notifications?.some(n => !n.isRead);
+        setHasUnread(unread);
+      } catch (err) {
+        console.error('Failed to fetch notifications', err);
+      }
+    };
+
+    fetchNotifications();
+  }, []);
+
   return (
     <>
       {(message || error) && (
@@ -77,9 +95,22 @@ const Header = ({ userName, toggleSidebar }) => {
         {/* RIGHT: Welcome + Buttons */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
           <p className="text-black dark:text-white text-base sm:text-lg font-bold">
-            Welcome back  <span className="font-semibold text-gray-800 dark:text-gray-300">{userName}</span>
+            Welcome back <span className="font-semibold text-gray-800 dark:text-gray-300">{userName}</span>
           </p>
 
+          {/* 🛎️ Notification Bell */}
+          <button
+            onClick={() => navigate('/notification')}
+            className="relative text-gray-600 dark:text-gray-300"
+            title="Notifications"
+          >
+            <Bell className="w-6 h-6" />
+            {hasUnread && (
+              <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+            )}
+          </button>
+
+          {/* Create Card */}
           <button
             className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-all text-sm sm:text-base w-full sm:w-auto text-center"
             onClick={createcard}
@@ -87,6 +118,7 @@ const Header = ({ userName, toggleSidebar }) => {
             Create Card
           </button>
 
+          {/* Logout */}
           <button
             onClick={logouthandler}
             className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-all text-sm sm:text-base w-full sm:w-auto text-center"

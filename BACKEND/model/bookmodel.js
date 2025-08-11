@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { create } = require('./usermodel');
 
 const bookschema = new mongoose.Schema({
     title: {
@@ -34,6 +35,10 @@ const bookschema = new mongoose.Schema({
     createdby: {
         type: mongoose.Schema.Types.ObjectId,
         ref:'user'
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
     }
 
 

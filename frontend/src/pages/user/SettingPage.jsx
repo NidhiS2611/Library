@@ -28,7 +28,7 @@ const SettingsPage = () => {
           Security Settings
         </Link>
         <Link
-          to="/helpsettings"
+          to="/user/settings/help"
           className="block px-6 py-4 bg-white dark:bg-gray-800 rounded-lg shadow hover:bg-blue-50 dark:hover:bg-gray-700 transition text-gray-900 dark:text-gray-100"
         >
           Help

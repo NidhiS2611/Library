@@ -9,7 +9,7 @@ const IssuedBooks = () => {
 
   const fetchIssuedBooks = async () => {
     try {
-      const res = await axios.get('http://localhost:3000/user/issuedbooks', {
+      const res = await axios.get('https://library-management-dwg7.onrender.com/user/issuedbooks', {
         withCredentials: true,
       });
 
@@ -27,7 +27,7 @@ const IssuedBooks = () => {
 
     
     try {
-     const res=  await axios.put(`http://localhost:3000/issuedbook/returnbook/${issuedbookid}`,
+     const res=  await axios.put(`https://library-management-dwg7.onrender.com/issuedbook/returnbook/${issuedbookid}`,
         {},
         { withCredentials: true }
       );
@@ -93,8 +93,13 @@ const IssuedBooks = () => {
                   const due = book.returnDate
                     ? new Date(book.returnDate).toLocaleDateString()
                     : 'N/A';
-                  const isOverdue = new Date() > new Date(book.returnDate);
+                    const today = new Date();
+  today.setHours(0, 0, 0, 0);
 
+  const returnDate = new Date(book.returnDate);
+  returnDate.setHours(0, 0, 0, 0);
+
+  const isOverdue = returnDate < today;
                   return (
                     <tr key={book._id} className="border-b hover:bg-gray-50 transition dark:hover:bg-slate-800">
                       <td className="py-4 px-4">

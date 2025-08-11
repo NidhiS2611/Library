@@ -6,6 +6,7 @@ const { getallbooks } = require('../controllers/bookcontroller')
 const authmiddle = require('../middleware/authmiddle')
 const { authroll } = require('../middleware/authroll')
 const {getalluser,userdetails,deleteuser,changepaassword} = require('../controllers/usercontrollers')
+const{getallhelprequest,giveresponse} = require('../controllers/helpcontroller')
 
 router.get('/getallbooks', authmiddle, authroll('admin'), getallbooks)
 router.get('/getallusers', authmiddle, authroll('admin'), getalluser)
@@ -26,4 +27,7 @@ router.get('/adminprofile',authmiddle,authroll('admin'),async(req,res)=>{
     }
     res.status(200).json({message:"Admin profile fetched successfully", user})
 })
+router.get('/helpsection', authmiddle, authroll('admin'), getallhelprequest)
+router.put('/resolvehelp/:id', authmiddle, authroll('admin'), giveresponse)
 module.exports = router
+

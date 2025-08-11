@@ -1,9 +1,10 @@
 const express = require('express')
 const db = require('./config/db')
 const app = express()
+require('./cronjob')
 const cors = require('cors')
 app.use(cors({
-  origin: 'http://localhost:5173', // Allow frontend origin
+  origin: 'https://library-management-z39u.vercel.app', // Allow frontend origin
   credentials: true               // Allow cookies / credentials
 }));
 app.use(express.json())
@@ -12,11 +13,14 @@ app.set('view engine', 'ejs')
 const userroutes = require('./routes/userroutes')
 const authmiddle = require('./middleware/authmiddle')
 const { authroll } = require('./middleware/authroll')
+
 const bookroutes = require('./routes/bookroutes')
 const issueBookroutes = require('./routes/issuedbookroutes')
 const indexroutes = require('./routes/indexroute')
 const librarayroutes = require('./routes/librarayroutes')
 const adminroutes = require('./routes/adminroutes')
+const notificationroutes = require('./routes/notificationsroutes')
+const helproutes = require('./routes/helproutes')
 const dotenv = require('dotenv')
 dotenv.config()
 const cookieParser = require('cookie-parser')
@@ -27,6 +31,8 @@ app.use('/issuedbook', issueBookroutes)
 app.use('/', indexroutes)
 app.use('/library', librarayroutes)
 app.use('/admin', adminroutes)
+app.use('/notifications', notificationroutes)
+app.use('/help', helproutes)
 
 
 app.listen(process.env.PORT || 3000,'0.0.0.0', () => {

@@ -2,7 +2,7 @@ const issuedbookmodel = require('../model/issuedbookmodel')
 const bookmodel = require('../model/bookmodel')
 const usermodel = require('../model/usermodel')
 const libraraycardmodel = require('../model/librarycard')
-const { sendmail } = require('../service/mail')
+const { sendMail } = require('../service/mail')
 
 const issueBook = async (req, res) => {
     try {
@@ -120,22 +120,11 @@ const returnbook = async (req, res) => {
 
     if (fine > 0) {
       const user = await usermodel.findById(userid);
-      const message = `
---------------------------------------------
-📖  LIBRARY DUES SLIP
---------------------------------------------
-Book Title     : "${book.title}"
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
 
-Returned On    : ${today.toDateString()}
-Fine Amount    : ₹${fine}
-Remarks        : Book returned late.
---------------------------------------------
-Please visit the library to settle your dues.
-
-Thank you,
-Library Admin
-`;
-      await sendmail(user.email, book.title, message);
+      await sendMail(user.email, 'returnedWithFine', book.title, book.author, fine);
       return res.status(200).json({ message: 'Book returned successfully with fine', fine: fine });
     }
 

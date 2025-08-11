@@ -10,6 +10,7 @@ const AdminSidebar = ({ active, toggleSidebar }) => {
     { id: 'books', label: 'Manage Books', icon: BookCheck, path: '/admin/managebooks' },
     { id: 'settings', label: 'Profile', icon:  User, path: '/admin/Profile' },
     { id: 'addbooks', label: 'Add Book', icon:Book , path: '/admin/addbooks' },
+       { id: 'helpsection', label: 'Help Section', icon:Book, path: '/admin/helpsection' },
   ];
 
   return (

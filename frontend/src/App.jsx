@@ -8,25 +8,28 @@ import { Navigate } from 'react-router-dom';
 
 import Protected from './component/Protected.jsx';
 import Librarydashboard from './layouts/Librarydashboard.jsx';
-import IssuedBooks from './pages/IssuedBooks.jsx';
-import ReturnedBooks from './pages/Returnedbooks.jsx';
-import Userdashboard from './pages/Userdashboard.jsx';
-import Books from './pages/Books.jsx';
-import Profile from './pages/Profile.jsx';
+import IssuedBooks from './pages/user/IssuedBooks.jsx';
+import ReturnedBooks from './pages/user/Returnedbooks.jsx';
+import Userdashboard from './pages/user/Userdashboard.jsx';
+import Books from './pages/user/Books.jsx';
+import Profile from './pages/user/Profile.jsx';
 import Admindashboard from './layouts/Admindashboard.jsx';
 import Explore from './pages/Explore.jsx';
-import Adminhome from './pages/Adminhome.jsx';
-import Manageuser from './pages/Manageuser.jsx';
-import Userdetails from './pages/Userdetails.jsx';
-import Managebooks from './pages/Managebooks.jsx';
-import Addbooks from './pages/Addbooks.jsx';
-import Adminprofile from './pages/Adminprofile.jsx';
+import Adminhome from './pages/admin/Adminhome.jsx';
+import Manageuser from './pages/admin/Manageuser.jsx';
+import Userdetails from './pages/admin/Userdetails.jsx';
+import Managebooks from './pages/admin/Managebooks.jsx';
+import Addbooks from './pages/admin/Addbooks.jsx';
+import Adminprofile from './pages/admin/Adminprofile.jsx';
 
-import SettingsPage from './pages/SettingPage.jsx';
-import Accountsettings from './pages/Accountsettings.jsx';
+import SettingsPage from './pages/user/SettingPage.jsx';
+import Accountsettings from './pages/user/Accountsettings.jsx';
 import Reactivate from './pages/Reactivate.jsx';
-import Notificationsttings from './pages/Notificationsttings.jsx';
+import Notificationsttings from './pages/user/Notificationsttings.jsx';
 import NotificationListener from './component/NotificationListener.jsx';
+import Notification from './pages/Notification.jsx';
+import Help from './pages/user/Help.jsx';
+import Helpsection from './pages/admin/Helpsection.jsx';
 function App() {
 
 
@@ -56,9 +59,11 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/reactivateaccount" element={<Reactivate />} />
-
+        
+<Route path="/notification" element={<Notification />} />
           <Route path="/user" element={<Protected><Librarydashboard /></Protected>}>
             <Route index element={<Navigate to="dashboard" />} />
+            
 
             <Route path="dashboard" element={<Userdashboard />} />
             <Route path="Books" element={<Books />} />
@@ -68,6 +73,7 @@ function App() {
             <Route path="settings" element={<SettingsPage />} />
             <Route path="settings/accountsettings" element={<Accountsettings />} />
             <Route path="settings/notificationsettings" element={<Notificationsttings />} />
+            <Route path="settings/help" element={<Help />} />
 
           </Route>
 
@@ -81,7 +87,8 @@ function App() {
             <Route path="managebooks" element={<Managebooks />} />
             <Route path="addbooks" element={<Addbooks />} />
             <Route path="profile" element={<Adminprofile />} />
-        
+          
+            <Route path="helpsection" element={<Helpsection />} />
 
           </Route>
 

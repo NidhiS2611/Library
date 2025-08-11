@@ -22,7 +22,7 @@ const register = async (req, res) => {
 
 
     const { name, email, password, role } = req.body;
-    console.log('registering user', req.body);
+    
 
     const validation = userschema.safeParse(req.body);
     if (!validation.success) {

@@ -1,7 +1,7 @@
 
 // AdminDashboard.jsx
-import AdminSidebar from '../component/AdminSidebar';
-import AdminHeader from '../component/AdminHeader';
+import AdminSidebar from '../component/admin/AdminSidebar';
+import AdminHeader from '../component/admin/AdminHeader';
 import { Outlet } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -14,7 +14,7 @@ const AdminDashboard = () => {
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/user/me", { withCredentials: true })
+    axios.get("https://library-management-dwg7.onrender.com/user/me", { withCredentials: true })
       .then((res) => setAdminName(res.data.user.name))
       .catch((err) => console.log("Admin fetch error:", err));
   }, []);
