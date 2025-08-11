@@ -20,7 +20,7 @@ const helpregister = async (req, res) => {
             message
         })
         res.status(201).json({ message: 'Help request created successfully', help })
-        console.log(help);
+        
 
     }
     catch (err) {
@@ -45,8 +45,7 @@ const getallhelprequest = async (req, res) => {
 const giveresponse = async (req, res) => {
     const { id } = req.params
     const { response } = req.body
-    console.log(id);
-    console.log(response);
+    
     try {
         if (!id || !response) {
 
@@ -56,7 +55,7 @@ const giveresponse = async (req, res) => {
         if (!help) {
             return res.status(404).json({ error: 'Help request not found' })
         }
-        console.log(help);
+
 
         help.response = response
         help.isresolved = true;
