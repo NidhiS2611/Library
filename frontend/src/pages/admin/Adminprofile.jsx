@@ -19,7 +19,7 @@ const Adminprofile = () => {
   // ✅ MOVED OUTSIDE useEffect
   const fetchProfile = async () => {
     try {
-      const res = await axios.get("https://library-management-dwg7.onrender.com/admin/adminprofile", {
+      const res = await axios.get("https://librarymanagement-81b2.onrender.com/admin/adminprofile", {
         withCredentials: true
       });
       setProfile(res.data.user);
@@ -68,7 +68,7 @@ const Adminprofile = () => {
     }
 
     try {
-      const res = await axios.patch("https://library-management-dwg7.onrender.com/user/updateuser", formData, {
+      const res = await axios.patch("https://librarymanagement-81b2.onrender.com/user/updateuser", formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
         withCredentials: true,
       });
@@ -84,7 +84,7 @@ const Adminprofile = () => {
   const handlePasswordChange = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.put("https://library-management-dwg7.onrender.com/admin/updatepassword", passwordData, {
+      const res = await axios.put("https://librarymanagement-81b2.onrender.com/admin/updatepassword", passwordData, {
         withCredentials: true,
       });
       setPasswordData({ oldPassword: '', newPassword: '' });

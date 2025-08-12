@@ -34,7 +34,7 @@ const Adminhome = () => {
   useEffect(() => {
     const fetchDashboardStats = async () => {
       try {
-        const res = await axios.get("https://library-management-dwg7.onrender.com/admindashboard", {
+        const res = await axios.get("https://librarymanagement-81b2.onrender.com/admindashboard", {
           withCredentials: true
         });
         setStats(res.data);

@@ -18,7 +18,7 @@ const Managebooks = () => {
 
   const fetchBooks = async (page = 1) => {
     try {
-      const res = await axios.get(`https://library-management-dwg7.onrender.com/admin/getallbooks?page=${page}&limit=${booksPerPage}`, {
+      const res = await axios.get(`https://librarymanagement-81b2.onrender.com/admin/getallbooks?page=${page}&limit=${booksPerPage}`, {
         withCredentials: true,
       });
       setBooks(res.data.books);
@@ -34,7 +34,7 @@ const Managebooks = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://library-management-dwg7.onrender.com/book/deletebook/${id}`, {
+      await axios.delete(`https://librarymanagement-81b2.onrender.com/book/deletebook/${id}`, {
         withCredentials: true,
       });
       fetchBooks(currentPage); // Refresh current page
@@ -56,7 +56,7 @@ const Managebooks = () => {
   const handleUpdate = async (id) => {
     try {
       await axios.put(
-        `https://library-management-dwg7.onrender.com/book/updatebook/${id}`,
+        `https://librarymanagement-81b2.onrender.com/book/updatebook/${id}`,
         formData,
         { withCredentials: true }
       );

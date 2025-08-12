@@ -18,7 +18,7 @@ const Accountsettings = () => {
       setError("");
 
       const res = await axios.put(
-        `https://library-management-dwg7.onrender.com/user/deactivate`,
+        `https://librarymanagement-81b2.onrender.com/user/deactivate`,
         {},
         { withCredentials: true }
       );
@@ -47,7 +47,7 @@ const Accountsettings = () => {
       setError("");
 
       const res = await axios.delete(
-        "https://library-management-dwg7.onrender.com/user/delete",
+        "https://librarymanagement-81b2.onrender.com/user/delete",
         { withCredentials: true }
       );
 

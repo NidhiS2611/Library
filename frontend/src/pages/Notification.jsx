@@ -8,7 +8,7 @@ const Notification = () => {
 
   const fetchNotifications = async () => {
     try {
-      const res = await axios.get('http://localhost:3000/notifications/getnotifications', {
+      const res = await axios.get('https://librarymanagement-81b2.onrender.com/notifications/getnotifications', {
         withCredentials: true,
       });
       setNotifications(res.data.notifications || []);
@@ -24,7 +24,7 @@ const Notification = () => {
   const handleNotificationClick = async (id) => {
     try {
       await axios.put(
-        `https://library-management-dwg7.onrender.com/notifications/user/${id}/mark-as-read`,
+        `https://librarymanagement-81b2.onrender.com/notifications/user/${id}/mark-as-read`,
         {},
         { withCredentials: true }
       );
@@ -38,7 +38,7 @@ const Notification = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://library-management-dwg7.onrender.com/notifications/user/${id}/delete`, {
+      await axios.delete(`https://librarymanagement-81b2.onrender.com/notifications/user/${id}/delete`, {
         withCredentials: true,
       });
       setNotifications((prev) => prev.filter((n) => n._id !== id));

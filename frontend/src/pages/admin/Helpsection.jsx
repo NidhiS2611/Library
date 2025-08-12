@@ -7,7 +7,7 @@ const Helpsection = () => {
   const [responses, setResponses] = useState({});
 
   const fetchHelpRequests = async () => {
-    const res = await axios.get('https://library-management-dwg7.onrender.com/admin/helpsection', {
+    const res = await axios.get('https://librarymanagement-81b2.onrender.com/admin/helpsection', {
       withCredentials: true,
     });
     setHelpRequests(res.data.helpRequests);
@@ -21,7 +21,7 @@ const Helpsection = () => {
       }
 
       await axios.put(
-        `https://library-management-dwg7.onrender.com/admin/resolvehelp/${id}`,
+        `https://librarymanagement-81b2.onrender.com/admin/resolvehelp/${id}`,
         { response: responses[id] },
         { withCredentials: true }
       );
@@ -37,7 +37,7 @@ const Helpsection = () => {
       return;
     }
     try {
-      await axios.delete(`https://library-management-dwg7.onrender.com/help/deletehelp/${id}`, {
+      await axios.delete(`https://librarymanagement-81b2.onrender.com/help/deletehelp/${id}`, {
         withCredentials: true,
       });
       fetchHelpRequests();

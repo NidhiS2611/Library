@@ -9,7 +9,7 @@ const IssuedBooks = () => {
 
   const fetchIssuedBooks = async () => {
     try {
-      const res = await axios.get('https://library-management-dwg7.onrender.com/user/issuedbooks', {
+      const res = await axios.get('https://librarymanagement-81b2.onrender.com/user/issuedbooks', {
         withCredentials: true,
       });
 
@@ -27,7 +27,7 @@ const IssuedBooks = () => {
 
     
     try {
-     const res=  await axios.put(`https://library-management-dwg7.onrender.com/issuedbook/returnbook/${issuedbookid}`,
+     const res=  await axios.put(`https://librarymanagement-81b2.onrender.com/issuedbook/returnbook/${issuedbookid}`,
         {},
         { withCredentials: true }
       );

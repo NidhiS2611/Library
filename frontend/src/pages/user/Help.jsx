@@ -17,7 +17,7 @@ const Help = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://library-management-dwg7.onrender.com/help/help", formData, {
+      const res = await axios.post("https://librarymanagement-81b2.onrender.com/help/help", formData, {
         withCredentials: true,
       });
       setMessage(res.data.message);

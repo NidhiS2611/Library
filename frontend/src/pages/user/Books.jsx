@@ -16,7 +16,7 @@ const Books = () => {
 
   const fetchBooks = async (page) => {
     try {
-      const res = await axios.get(`https://library-management-dwg7.onrender.com/getallbooks?page=${page}&limit=${booksPerPage}`, {
+      const res = await axios.get(`https://librarymanagement-81b2.onrender.com/getallbooks?page=${page}&limit=${booksPerPage}`, {
         withCredentials: true,
       });
       setBooks(res.data.books);
@@ -29,7 +29,8 @@ const Books = () => {
   const issueBook = async (bookid) => {
     setIssuingBookId(bookid);
     try {
-      const res = await axios.post(`https://library-management-dwg7.onrender.com/issuedbook/issuebook/${bookid}`, {}, {
+      const res = await axios.post(`https://librarymanagement-81b2.onrender.com/issuedbook/issuebook/${bookid}`, {}, {
+
         withCredentials: true,
       });
       setMessage(res.data.message || 'Book issued successfully');
@@ -46,7 +47,7 @@ const Books = () => {
       if (search.trim() === '') {
         fetchBooks(currentPage);
       } else {
-        const res = await axios.get(`https://library-management-dwg7.onrender.com/search?search=${search}`, {
+        const res = await axios.get(`https://librarymanagement-81b2.onrender.com/search?search=${search}`, {
           withCredentials: true,
         });
         setBooks(res.data.filterbooks);

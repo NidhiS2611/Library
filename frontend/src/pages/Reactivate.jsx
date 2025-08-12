@@ -7,7 +7,7 @@ const Reactivate = () => {
 
   const handleReactivate = async () => {
     try {
-      const res = await axios.put('https://library-management-dwg7.onrender.com/user/reactivate', { email });
+      const res = await axios.put('https://librarymanagement-81b2.onrender.com/user/reactivate', { email });
       setMessage('Account reactivated successfully! Redirecting to login...');
       setTimeout(() => {
         window.location.href = '/login';

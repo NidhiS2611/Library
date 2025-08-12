@@ -26,7 +26,7 @@ const Register = () => {
     setMessage('');
 
     try {
-      const res = await axios.post('https://library-management-dwg7.onrender.com/user/register', formData, {
+      const res = await axios.post('https://librarymanagement-81b2.onrender.com/user/register', formData, {
         withCredentials: true
       });
 

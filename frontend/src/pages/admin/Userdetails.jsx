@@ -9,7 +9,7 @@ const Userdetails = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get(`https://library-management-dwg7.onrender.com/admin/user/${userid}`, {
+        const res = await axios.get(`https://librarymanagement-81b2.onrender.com/admin/user/${userid}`, {
           withCredentials: true,
         });
         console.log('User data:', res.data);

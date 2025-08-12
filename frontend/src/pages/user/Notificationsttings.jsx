@@ -19,7 +19,7 @@ const NotificationSettings = () => {
   // 🔁 Reusable fetch function
   const fetchNotificationSettings = async () => {
     try {
-      const res = await axios.get('https://library-management-dwg7.onrender.com/user/getnotificationsetting',{withCredentials:true});
+      const res = await axios.get('https://librarymanagement-81b2.onrender.com/user/getnotificationsetting',{withCredentials:true});
       setSettings(res.data.notificationPreferences); // make sure backend is returning only preferences
     } catch (err) {
       console.error('Error fetching settings:', err);
@@ -43,7 +43,7 @@ const NotificationSettings = () => {
 
   const handleSave = async () => {
     try {
-      const res = await axios.put('https://library-management-dwg7.onrender.com/user/updatenotification', settings, { withCredentials: true });
+      const res = await axios.put('https://librarymanagement-81b2.onrender.com/user/updatenotification', settings, { withCredentials: true });
       setSettings(settings); // update state with new settings
       setMessage(res.data.message);
 
