@@ -6,12 +6,12 @@ import { getMessaging, getToken, onMessage } from "firebase/messaging"
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDEjjnL8o8fCsoFEmK1OcYYtxXUdRUpWJ8",
-  authDomain: "library-3390a.firebaseapp.com",
-  projectId: "library-3390a",
-  storageBucket: "library-3390a.appspot.com",
-  messagingSenderId: "410717725920",
-  appId: "1:410717725920:web:f879df68bbfa2cf72a5c85"
+  apiKey: process.env.API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
+  projectId: process.env.PROJECT_ID,
+  storageBucket: process.env.STORAGE_BUCKET,
+  messagingSenderId: process.env.MESSAGING_SENDER_ID,
+  appId: process.env.APP_ID
 };
 
 // Initialize Firebase
