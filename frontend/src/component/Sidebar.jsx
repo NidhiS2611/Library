@@ -1,5 +1,5 @@
 
-// Sidebar.jsx
+
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { BookOpen, BookCheck, BookX, User, Home, X ,HomeIcon,Settings} from 'lucide-react';
