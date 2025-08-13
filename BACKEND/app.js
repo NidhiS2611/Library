@@ -5,7 +5,7 @@ require('./cronjob')
 const cors = require('cors')
 app.use(cors({
   origin: 'https://library-bk56.vercel.app', // Allow frontend origin
-  credentials: true               // Allow cookies / credentials
+  credentials: true               
 }));
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
