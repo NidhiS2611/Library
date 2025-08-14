@@ -25,10 +25,11 @@ const HeroSection = () => {
               Explore Catalog →
             </button>
           </Link>
-
-          <button className="border border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-gray-700 px-8 py-3 rounded-full font-semibold transition-transform hover:scale-105">
-            Learn More
-          </button>
+          <Link to="/libraryinfo">
+            <button className="border border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-gray-700 px-8 py-3 rounded-full font-semibold transition-transform hover:scale-105">
+              Learn More
+            </button>
+          </Link>
         </div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 const express = require('express');
 const usermodel = require('../model/usermodel');
 const router = express.Router();
-const { register, login, getalluser, deleteuser, returnedbook, issuedbook, logout, dashboard, updateuser, profilesummary,deactivateaccount,reactivateaccount ,updatenotification,getnotificationsetting,savetoken} = require('../controllers/usercontrollers');
+const { register, login, getalluser, deleteuser, returnedbook, issuedbook, logout, dashboard, updateuser, profilesummary,deactivateaccount,reactivateaccount ,updatenotification,getnotificationsetting,savetoken,deleteaccount} = require('../controllers/usercontrollers');
 const authmiddle = require('../middleware/authmiddle');
 const { authroll } = require('../middleware/authroll');
 const upload = require('../utility/multer');
@@ -33,5 +33,6 @@ router.put('/updatenotification', authmiddle, updatenotification);
 
 router.get('/getnotificationsetting', authmiddle, getnotificationsetting);
 router.post('/save-token', authmiddle, savetoken);
+router.delete('/delete-account', authmiddle, deleteaccount);
 
 module.exports = router;

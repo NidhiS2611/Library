@@ -537,5 +537,21 @@ const savetoken = async (req,res)=>{
 
   }
 }
+  const deleteaccount = async(req,res)=>{
+    const userid = req.user?.id
+    try{
+      const user = await usermodel.findById(userid)
+      if(!user){
+        return res.status(404).json({ message: 'User not found' });
+      }
+      await issuedbookmodel.deleteMany({ userId: userid });
+      await usermodel.findByIdAndDelete(userid)
+      return res.status(200).json({ message: 'User account deleted successfully' });
 
-module.exports = { register, login, getalluser, deleteuser, returnedbook, issuedbook, logout, dashboard, updateuser, profilesummary, userdetails, changepaassword, deactivateaccount ,reactivateaccount ,updatenotification, getnotificationsetting ,savetoken}
+    }
+    catch(err){
+
+    }
+
+  }
+module.exports = { register, login, getalluser, deleteuser, returnedbook, issuedbook, logout, dashboard, updateuser, profilesummary, userdetails, changepaassword, deactivateaccount ,reactivateaccount ,updatenotification, getnotificationsetting ,savetoken,deleteaccount}

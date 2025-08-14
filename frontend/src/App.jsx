@@ -30,6 +30,8 @@ import NotificationListener from './component/NotificationListener.jsx';
 import Notification from './pages/Notification.jsx';
 import Help from './pages/user/Help.jsx';
 import Helpsection from './pages/admin/Helpsection.jsx';
+import LibraryInfoPage from './pages/LibraryInfoPage.jsx';
+
 function App() {
 
 
@@ -54,16 +56,17 @@ function App() {
       <Router>
         <NotificationListener />
         <Routes>
-          
+
           <Route path="/" element={<Homepage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/reactivateaccount" element={<Reactivate />} />
-        
-<Route path="/notification" element={<Notification />} />
+          <Route path="/libraryinfo" element={<LibraryInfoPage />} />
+
+          <Route path="/notification" element={<Notification />} />
           <Route path="/user" element={<Protected><Librarydashboard /></Protected>}>
             <Route index element={<Navigate to="dashboard" />} />
-            
+
 
             <Route path="dashboard" element={<Userdashboard />} />
             <Route path="Books" element={<Books />} />
@@ -87,7 +90,7 @@ function App() {
             <Route path="managebooks" element={<Managebooks />} />
             <Route path="addbooks" element={<Addbooks />} />
             <Route path="profile" element={<Adminprofile />} />
-          
+
             <Route path="helpsection" element={<Helpsection />} />
 
           </Route>

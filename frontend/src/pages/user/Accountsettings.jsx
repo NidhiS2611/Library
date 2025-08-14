@@ -47,7 +47,7 @@ const Accountsettings = () => {
       setError("");
 
       const res = await axios.delete(
-        "https://librarymanagement-81b2.onrender.com/user/delete",
+        "https://librarymanagement-81b2.onrender.com/user/delete-account",
         { withCredentials: true }
       );
 
