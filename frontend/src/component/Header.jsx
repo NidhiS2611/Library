@@ -53,7 +53,7 @@ const Header = ({ userName, toggleSidebar }) => {
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        const res = await axios.get('https://library-management-dwg7.onrender.com/notifications/getnotifications', {
+        const res = await axios.get('https://librarymanagement-81b2.onrender.com/notifications/getnotifications', {
           withCredentials: true,
         });
         const unread = res.data.notifications?.some(n => !n.isRead);
