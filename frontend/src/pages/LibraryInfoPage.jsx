@@ -24,7 +24,7 @@ const LibraryInfoPage = () => {
       </div>
 
       {/* Features */}
-      <h2 className="text-2xl md:text-3xl font-semibold text-center mb-6 md:mb-8">Library Features</h2>
+      <h2 className="text-2xl md:text-3xl font-semibold text-center mb-6 md:mb-8 text-gray-100 dark:text-white">Library Features</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 mb-12">
         {features.map((feature, index) => (
           <div key={index} className="bg-white dark:bg-gray-800 p-4 md:p-6 rounded-xl shadow hover:shadow-lg transition duration-300 text-center">
