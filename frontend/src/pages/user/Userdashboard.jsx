@@ -83,7 +83,7 @@ const Dashboard = () => {
       </div>
 
       <footer className="mt-20 text-gray-400 dark:text-gray-500 text-sm text-center">
-        © {new Date().getFullYear()} LibraryNS — Built with ❤️ by Nikhil
+        © {new Date().getFullYear()} LibraryNS — Built with ❤️ by Nidhi
       </footer>
     </div>
   );
