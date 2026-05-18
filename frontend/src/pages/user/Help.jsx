@@ -86,8 +86,8 @@ const Help = () => {
         <h3 className="text-xl font-semibold mb-2">📞 Contact Us</h3>
         <p className="text-sm">If you need further assistance, feel free to reach out:</p>
         <div className="mt-2">
-          <p>Email: <a href="mailto:nikhildhuriya26@gmail.com" className="text-blue-600 hover:underline">nikhildhuriya26@gmail.com</a></p>
-          <p>Phone: <a href="tel:+919999999999" className="text-blue-600 hover:underline">+91 99999 99999</a></p>
+          <p>Email: <a href="mailto:nidhikalpana555@gmail.com" className="text-blue-600 hover:underline">nikhildhuriya26@gmail.com</a></p>
+          <p>Phone: <a href="tel:+919599741960" className="text-blue-600 hover:underline">+91 9599741960</a></p>
         </div>
       </div>
     </div>
